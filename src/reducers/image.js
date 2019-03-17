@@ -8,7 +8,17 @@ const image = (state = {}, action) => {
                 height: action.height,
                 layers: [
                     {
-                        contents: ''
+                        contents: null
+                    }
+                ]
+            };
+        case TYPES.LOAD_IMAGE_FROM_LOCAL_FILE:
+            return {
+                width: action.width,
+                height: action.height,
+                layers: [
+                    {
+                        contents: action.contents
                     }
                 ]
             };

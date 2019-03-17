@@ -8,14 +8,32 @@ export class CanvasLayer extends Component {
         this.layer = React.createRef();
     }
 
-    componentDidMount() {
+    fillCanvas = () => {
         const canvas = this.layer.current;
+        const context = canvas.getContext('2d');
         canvas.width = this.props.width;
         canvas.height = this.props.height;
 
-        const context = canvas.getContext('2d');
-        context.fillStyle = 'white';
-        context.fillRect(0, 0, canvas.width, canvas.height);
+        const contents = this.props.contents;
+        if (contents) {
+            const image = new Image();
+            image.src = contents;
+            image.onload = () => {
+                context.drawImage(image, 0, 0);
+            };
+        } else {
+            context.fillStyle = 'white';
+            context.fillRect(0, 0, canvas.width, canvas.height);
+        }
+    };
+
+    componentDidMount() {
+        // const canvas = this.layer.current;
+        this.fillCanvas();
+    }
+
+    componentDidUpdate() {
+        this.fillCanvas();
     }
 
     render() {
