@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyledHeader, Ul } from './elements';
-import File from '../Menubar/Menus/File';
 import ToolDetails from '../ToolDetails';
 import Edit from '../Menubar/Menus/Edit';
 import Image from '../Menubar/Menus/Image';
@@ -9,13 +8,14 @@ import Select from '../Menubar/Menus/Select';
 import Filter from '../Menubar/Menus/Filter';
 import View from '../Menubar/Menus/View';
 import Window from '../Menubar/Menus/Window';
+import FileMenu from '../../containers/FileMenu';
 
 const Header = () => {
     return (
         <>
             <StyledHeader>
                 <Ul>
-                    <File />
+                    <FileMenu />
                     <Edit />
                     <Image />
                     <Layer />

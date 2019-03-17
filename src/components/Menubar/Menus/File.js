@@ -32,10 +32,13 @@ export default class File extends Component {
                     </SubMenuItem>
                     <SubMenuItem name="Save" />
                 </MenuItem>
-                <NewFileModal
-                    onClose={e => this.openModal('newFileModal', false)}
-                    isOpen={this.state.newFileModalOpen}
-                />
+                {this.state.newFileModalOpen ? (
+                    <NewFileModal
+                        onClose={e => this.openModal('newFileModal', false)}
+                        isOpen={true}
+                        onConfirm={this.props.createNewImage}
+                    />
+                ) : null}
             </>
         );
     }

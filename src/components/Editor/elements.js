@@ -66,13 +66,3 @@ export const ImageArea = styled.div`
     justify-content: center;
     align-items: center;
 `;
-
-export const Image = styled.canvas`
-    background-color: orange;
-    width: 1900px;
-    height: 900px;
-    margin-top: auto;
-    margin-bottom: auto;
-    flex: 0 0 auto;
-    border: 10px solid ${props => props.theme.imagearea.backgroundColor};
-`;

@@ -15,6 +15,24 @@ import {
 ReactModal.setAppElement('#root');
 
 class NewFileModal extends Component {
+    state = {
+        width: 800,
+        height: 600
+    };
+
+    handleCreateRequest = () => {
+        let { width, height } = this.state;
+        this.props.onConfirm(width, height);
+        this.props.onClose();
+    };
+
+    handleInputChange = event => {
+        const { value, name } = event.target;
+        this.setState({
+            [name]: value
+        });
+    };
+
     render() {
         return (
             <StyledModal
@@ -28,15 +46,25 @@ class NewFileModal extends Component {
                 <Main>
                     <Div>
                         <Label>Width</Label>
-                        <Input type="text" value="800" />
+                        <Input
+                            onChange={this.handleInputChange}
+                            name="width"
+                            type="text"
+                            value={this.state.width}
+                        />
                         {' px'}
                     </Div>
                     <Div>
                         <Label>Height</Label>
-                        <Input type="text" value="600" />
+                        <Input
+                            onChange={this.handleInputChange}
+                            name="height"
+                            type="text"
+                            value={this.state.height}
+                        />
                         {' px'}
                     </Div>
-                    <Button onClick={this.props.onClose}>Create</Button>
+                    <Button onClick={this.handleCreateRequest}>Create</Button>
                 </Main>
             </StyledModal>
         );

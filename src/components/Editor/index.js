@@ -6,14 +6,14 @@ import {
     EditorBlock,
     OpenFiles,
     ImageArea,
-    RightBar,
-    Image
+    RightBar
 } from './elements';
 import Toolbar from '../Toolbar';
+import VisibleImage from '../../containers/VisibleImage';
 
 class Editor extends Component {
     state = {
-        size: 250
+        size: 350
     };
 
     componentDidMount() {
@@ -25,10 +25,6 @@ class Editor extends Component {
     }
 
     resize = event => {
-        console.log(event);
-        // this.setState({
-        //     size: this.state.size
-        // });
         this.forceUpdate();
     };
 
@@ -56,7 +52,7 @@ class Editor extends Component {
                             <EditorBlock>
                                 <OpenFiles />
                                 <ImageArea>
-                                    <Image />
+                                    <VisibleImage />
                                 </ImageArea>
                             </EditorBlock>
                             <RightBar />
