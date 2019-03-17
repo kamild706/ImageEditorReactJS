@@ -63,6 +63,6 @@ export const ImageArea = styled.div`
     // align-items: center;
     overflow: auto;
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
 `;

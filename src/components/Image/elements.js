@@ -10,8 +10,7 @@ export const Wrapper = styled.div`
 
     overflow: hidden;
     position: relative;
-    margin-top: auto;
-    margin-bottom: auto;
+    margin: auto;
     flex: 0 0 auto;
-    border: 10px solid ${props => props.theme.imagearea.backgroundColor};
+    border: 40px solid ${props => props.theme.imagearea.backgroundColor};
 `;
