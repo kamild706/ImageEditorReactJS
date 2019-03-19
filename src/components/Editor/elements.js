@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.main`
-    // height: 100%;
     .Resizer {
         width: 2px;
         background-color: ${props => props.theme.editor.resizerColor};
@@ -11,8 +10,6 @@ export const Wrapper = styled.main`
     .SplitPane {
         position: static !important;
     }
-    // z-index: 100;
-    // display: flex;
 
     position: absolute;
     top: 4rem;
@@ -29,11 +26,9 @@ export const MainBlock = styled.section`
         cursor: col-resize;
     }
     flex: 1;
-    // display: flex;
 `;
 
 export const EditorBlock = styled.div`
-    // flex: 1;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -41,7 +36,6 @@ export const EditorBlock = styled.div`
 
 export const RightBar = styled.div`
     border-top: 5px solid ${props => props.theme.rightbar.borderTopColor};
-    // min-width: 250px;
     height: 100%;
     background-color: ${props => props.theme.rightbar.backgroundColor};
 `;
@@ -53,16 +47,8 @@ export const OpenFiles = styled.div`
 
 export const ImageArea = styled.div`
     background-color: ${props => props.theme.imagearea.backgroundColor};
-    // flex: 1 1 auto;
     flex: 1;
-    // height: 100%;
-    // height: 0;
-    // overflow-y: auto;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
     overflow: auto;
     display: flex;
-    // justify-content: center;
     align-items: center;
 `;

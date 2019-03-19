@@ -16,8 +16,6 @@ export const StyledModal = styled(ReactModalAdapter).attrs({
     overlayClassName: 'Overlay',
     modalClassName: 'Modal'
 })`
-    /* Portal styles here (though usually you will have none) */
-
     .Overlay {
         position: absolute;
         top: 0;
@@ -31,16 +29,14 @@ export const StyledModal = styled(ReactModalAdapter).attrs({
     }
 
     .Modal {
-        width: 340px;
-        height: 180px;
-        background-color: #222;
+        width: 21.25rem;
+        background-color: ${props => props.theme.modalDialog.backgroundColor};
         color: white;
     }
 `;
 
 export const Header = styled.header`
     height: 1rem;
-    // background-color: #484848;
     background: linear-gradient(
         to bottom,
         #595959 0%,
@@ -50,50 +46,38 @@ export const Header = styled.header`
         #3a3a3a 97%,
         #2e2e2e 100%
     );
-    padding: 1rem;
-`;
-
-export const Main = styled.main`
-    padding: 1rem;
-    background-color: #474747;
-    height: 100%;
-`;
-
-export const Label = styled.label`
-    display: inline-block;
-    width: 4rem;
+    padding: 0.8rem;
 `;
 
 export const Input = styled.input`
-    background-color: #252525;
+    background-color: ${props => props.theme.modalDialog.inputBackgroundColor};
     color: white;
     border: none;
-`;
-
-export const Div = styled.div`
-    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    padding: 0.3rem;
 `;
 
 export const Button = styled.button`
     border: none;
-    background-color: #606060;
+    background-color: ${props => props.theme.modalDialog.buttonBackgroundColor};
     width: 100%;
     height: 2rem;
     margin-top: 1rem;
     border-radius: 3px;
-    // border-bottom-color: rgba(0, 0, 0, 0.6);
-    // border-bottom-width: 1px;
     color: white;
 `;
 
 export const CloseButton = styled.span`
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB4AAAAeABBeqfSQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEGSURBVEiJ7dXNTsJAFIbh4gXohgUL0PCzgfu/BsUFe7QgAgu5CX1cMMQGOu3QYKIJb9LVfGfeTjPnNMuu/EvQxgxvGCbkhyE7QztV0sHcDztMKvKTkDkwRydF9OSUNQYl2UFYO+axTtLCa0khvKNfyPYjEnhBq07WRR7Z4APj8OwimRzd2k+X8LarcLoy1sVTp8p6WEQ2LGOB3lmSBrLmkiPZskKyTJHcpLiyLPuqWP8MmebYd3zsUhRZS5ggVZJNguTA5mwZHuxnVxkr8eu9xH2qZIRtZKPcvqGrmnqLUZ3kUiNoLmEETUsKLztUQ/EdngtFlc3otKmnuK0VheLf//Fd+XN8A8nOdB4BsdGzAAAAAElFTkSuQmCC);
-    // filter: invert(1);
-    width: 1.5rem;
-    height: 1.5rem;
+    background-image: url('icons/cancel.png');
+    filter: invert(1);
+    width: 1.2rem;
+    height: 1.2rem;
+    background-size: 1.2rem 1.2rem;
     float: right;
+    cursor: pointer;
 `;
 
 export const HeaderTitle = styled.span`
     float: left;
+    font-size: 1.1rem;
 `;

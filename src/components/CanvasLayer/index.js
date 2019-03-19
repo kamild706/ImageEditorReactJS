@@ -28,7 +28,6 @@ export class CanvasLayer extends Component {
     };
 
     componentDidMount() {
-        // const canvas = this.layer.current;
         this.fillCanvas();
     }
 

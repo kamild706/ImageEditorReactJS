@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import ReactModal from 'react-modal';
+import { Label, Main, Div } from './elements';
 import {
     Header,
-    Label,
     Input,
     Button,
     StyledModal,
-    Main,
-    Div,
-    HeaderTitle,
-    CloseButton
-} from './elements';
+    CloseButton,
+    HeaderTitle
+} from '../commons';
 
 ReactModal.setAppElement('#root');
 

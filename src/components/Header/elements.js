@@ -4,12 +4,9 @@ export const StyledHeader = styled.header`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    // min-height: 4rem;
-    // max-height: 4rem;
     height: 4rem;
     color: ${props => props.theme.header.color};
     background-color: ${props => props.theme.header.backgroundColor};
-    // z-index: 1000;
 `;
 
 export const Ul = styled.ul`

@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-    background-color: orange;
-    // width: 800px;
-    // height: 500px;
+    background-color: ${props => props.theme.image.defaultColor};
 
     width: ${props => props.width + 'px'};
     height: ${props => props.height + 'px'};

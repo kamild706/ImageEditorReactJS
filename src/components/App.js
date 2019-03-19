@@ -17,10 +17,12 @@ const blackTheme = {
         backgroundColor: '#222',
         dropdown: {
             backgroundColor: 'white',
-            hoverBackgroundColor: '#5194ff'
+            hoverBackgroundColor: '#5194ff',
+            dropdown: 'grey'
         },
         nestedDropdown: {
-            backgroundColor: 'white'
+            backgroundColor: 'white',
+            borderLeft: '#222'
         }
     },
     toolbar: {
@@ -44,6 +46,14 @@ const blackTheme = {
     },
     imagearea: {
         backgroundColor: '#252525'
+    },
+    image: {
+        defaultColor: 'white'
+    },
+    modalDialog: {
+        backgroundColor: '#474747',
+        inputBackgroundColor: '#252525',
+        buttonBackgroundColor: '#606060'
     }
 };
 
@@ -62,8 +72,6 @@ const GlobalStyle = createGlobalStyle`
     }
 
     #root {
-        // display: flex;
-        // flex-direction: column;
         overflow: hidden;
     }
 `;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MenuItem from '../MenuItem';
 import SubMenuItem from '../SubMenuItem';
-import NewFileModal from '../Modals/NewFileModal';
+import NewFileModal from '../../Modals/NewFileModal';
 import { LocalFilePicker } from './elements';
 
 export default class File extends Component {

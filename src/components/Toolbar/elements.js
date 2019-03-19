@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const StyledToolbar = styled.div`
     border-top: 5px solid ${props => props.theme.toolbar.borderTopColor};
     box-sizing: border-box;
-    // width: 40px;
     height: 100%;
     background-color: ${props => props.theme.toolbar.backgroundColor};
     text-align: center;
