@@ -1,8 +1,21 @@
 import React from 'react';
-import { ToolDetailsBar } from './elements';
+import { ToolDetailsBar, ToolIcon, Icon } from './elements';
 
-const ToolDetails = () => {
-    return <ToolDetailsBar />;
+const ToolDetails = ({ selectedTool, path }) => {
+    function computePath() {
+        let computedName = selectedTool.toLowerCase().replace(/_/g, '-');
+        return `icons/${computedName}.png`;
+    }
+
+    return (
+        <ToolDetailsBar>
+            {selectedTool && (
+                <ToolIcon>
+                    <Icon alt={selectedTool} src={path || computePath()} />
+                </ToolIcon>
+            )}
+        </ToolDetailsBar>
+    );
 };
 
 export default ToolDetails;

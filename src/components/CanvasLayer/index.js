@@ -22,8 +22,8 @@ export class CanvasLayer extends Component {
                 context.drawImage(image, 0, 0);
             };
         } else {
-            context.fillStyle = 'white';
-            context.fillRect(0, 0, canvas.width, canvas.height);
+            // context.fillStyle = 'white';
+            // context.fillRect(0, 0, canvas.width, canvas.height);
         }
     };
 

@@ -8,8 +8,8 @@ import {
     ImageArea,
     RightBar
 } from './elements';
-import Toolbar from '../Toolbar';
 import VisibleImage from '../../containers/VisibleImage';
+import ClickableToolbar from '../../containers/ClickableToolbar';
 
 class Editor extends Component {
     state = {
@@ -38,7 +38,7 @@ class Editor extends Component {
                     maxSize={80}
                     step={40}
                 >
-                    <Toolbar />
+                    <ClickableToolbar />
                     <MainBlock>
                         <SplitPane
                             split="vertical"
