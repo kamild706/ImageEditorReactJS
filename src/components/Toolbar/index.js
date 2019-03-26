@@ -20,7 +20,7 @@ const Toolbar = ({ selectTool, selectedTool }) => {
             <Tool
                 name="Brush Tool"
                 onClick={handleClick.bind(null, TOOL_TYPES.BRUSH_TOOL)}
-                selected={selectedTool}
+                selected={selectedTool && selectedTool.name}
             />
             <Tool name="Clone Tool" />
             <Tool name="Eraser Tool" />

@@ -1,6 +1,6 @@
 import React from 'react';
-import { CanvasLayer } from '../CanvasLayer';
 import { Wrapper } from './elements';
+import EditableCanvasLayer from '../../containers/EditableCanvasLayer';
 
 export const Image = ({ width, height, layers }) => {
     if (width && height)
@@ -8,7 +8,7 @@ export const Image = ({ width, height, layers }) => {
             <Wrapper width={width} height={height}>
                 {layers &&
                     layers.map((layer, index) => (
-                        <CanvasLayer
+                        <EditableCanvasLayer
                             width={width}
                             height={height}
                             index={index}

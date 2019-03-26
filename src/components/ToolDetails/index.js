@@ -3,7 +3,7 @@ import { ToolDetailsBar, ToolIcon, Icon } from './elements';
 
 const ToolDetails = ({ selectedTool, path }) => {
     function computePath() {
-        let computedName = selectedTool.toLowerCase().replace(/_/g, '-');
+        let computedName = selectedTool.name.toLowerCase().replace(/_/g, '-');
         return `icons/${computedName}.png`;
     }
 
@@ -11,7 +11,7 @@ const ToolDetails = ({ selectedTool, path }) => {
         <ToolDetailsBar>
             {selectedTool && (
                 <ToolIcon>
-                    <Icon alt={selectedTool} src={path || computePath()} />
+                    <Icon alt={selectedTool.name} src={path || computePath()} />
                 </ToolIcon>
             )}
         </ToolDetailsBar>
