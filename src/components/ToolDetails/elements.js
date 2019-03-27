@@ -17,6 +17,6 @@ export const Icon = styled.img`
 `;
 
 export const ToolIcon = styled.div`
-    width: 40px;
+    width: 2.5rem;
     position: relative;
 `;

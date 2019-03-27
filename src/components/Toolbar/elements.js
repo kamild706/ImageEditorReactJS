@@ -9,9 +9,10 @@ export const StyledToolbar = styled.div`
 `;
 
 export const StyledTool = styled.button`
-    // background-color: ${props => props.theme.toolbar.button.backgroundColor};
     background-color: ${props =>
-        props.selected ? '#222' : props.theme.toolbar.button.backgroundColor}
+        props.selected
+            ? props.theme.toolbar.button.hoverBackgroundColor
+            : props.theme.toolbar.button.backgroundColor}
     border: none;
     color: ${props => props.theme.toolbar.button.color};
     padding-top: 0.25rem;
