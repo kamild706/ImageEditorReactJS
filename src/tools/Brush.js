@@ -4,6 +4,8 @@ class Brush {
     isDrawing = false;
     context = null;
     name = TOOL_TYPES.BRUSH_TOOL;
+    size = 13;
+    opacity = 60;
 
     setContext = context => {
         this.context = context;
@@ -11,6 +13,10 @@ class Brush {
 
     onmousedown = event => {
         this.isDrawing = true;
+        this.context.lineWidth = this.size;
+        this.context.lineJoin = 'round';
+        this.context.lineCap = 'round';
+        this.context.globalAlpha = this.opacity / 100;
         this.context.moveTo(event.offsetX, event.offsetY);
     };
 

@@ -54,6 +54,19 @@ const blackTheme = {
         backgroundColor: '#474747',
         inputBackgroundColor: '#252525',
         buttonBackgroundColor: '#606060'
+    },
+    toolDetails: {
+        textColor: 'white',
+        button: {
+            backgroundColor: 'initial'
+        },
+        input: {
+            backgroundColor: '#222'
+        },
+        sizePicker: {
+            backgroundColor: '#474747',
+            borderColor: '#222'
+        }
     }
 };
 

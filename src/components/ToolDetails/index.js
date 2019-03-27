@@ -1,5 +1,10 @@
 import React from 'react';
 import { ToolDetailsBar, ToolIcon, Icon } from './elements';
+import { TOOL_TYPES } from '../../actions';
+import { BrushToolDetails } from './BrushToolDetails';
+
+const COMPONENTS = {};
+COMPONENTS[TOOL_TYPES.BRUSH_TOOL] = <BrushToolDetails />;
 
 const ToolDetails = ({ selectedTool, path }) => {
     function computePath() {
@@ -10,9 +15,15 @@ const ToolDetails = ({ selectedTool, path }) => {
     return (
         <ToolDetailsBar>
             {selectedTool && (
-                <ToolIcon>
-                    <Icon alt={selectedTool.name} src={path || computePath()} />
-                </ToolIcon>
+                <>
+                    <ToolIcon>
+                        <Icon
+                            alt={selectedTool.name}
+                            src={path || computePath()}
+                        />
+                    </ToolIcon>
+                    {COMPONENTS[selectedTool.name]}
+                </>
             )}
         </ToolDetailsBar>
     );
