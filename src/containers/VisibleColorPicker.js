@@ -1,17 +1,16 @@
 import { connect } from 'react-redux';
-import { selectTool } from '../actions';
-import Toolbar from '../components/Toolbar';
+import { selectColor } from '../actions';
+import ColorPicker from '../components/ColorPicker';
 
 const mapStateToProps = state => ({
-    selectedTool: state.selectedTool,
     color: state.color
 });
 
 const mapDispatchToProps = dispatch => ({
-    selectTool: toolType => dispatch(selectTool(toolType))
+    selectColor: color => dispatch(selectColor(color))
 });
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Toolbar);
+)(ColorPicker);

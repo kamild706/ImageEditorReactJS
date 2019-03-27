@@ -1,7 +1,8 @@
 export const TYPES = {
     CREATE_NEW_IMAGE: 'CREATE_NEW_IMAGE',
     LOAD_IMAGE_FROM_LOCAL_FILE: 'LOAD_IMAGE_FROM_LOCAL_FILE',
-    SELECT_TOOL: 'SELECT_TOOL'
+    SELECT_TOOL: 'SELECT_TOOL',
+    SELECT_COLOR: 'SELECT_COLOR'
 };
 
 export const TOOL_TYPES = {
@@ -24,4 +25,9 @@ export const loadImageFromLocalFile = (contents, width, height) => ({
 export const selectTool = toolType => ({
     type: TYPES.SELECT_TOOL,
     toolType
+});
+
+export const selectColor = color => ({
+    type: TYPES.SELECT_COLOR,
+    color
 });

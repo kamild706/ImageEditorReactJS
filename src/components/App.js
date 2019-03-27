@@ -67,6 +67,9 @@ const blackTheme = {
             backgroundColor: '#474747',
             borderColor: '#222'
         }
+    },
+    colorPicker: {
+        selectedColorBackground: '#252525'
     }
 };
 

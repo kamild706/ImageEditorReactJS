@@ -2,8 +2,13 @@ import React from 'react';
 import { StyledToolbar } from './elements';
 import Tool from './Tool';
 import { TOOL_TYPES } from '../../actions';
+import VisibleColorPicker from '../../containers/VisibleColorPicker';
 
-const Toolbar = ({ selectTool, selectedTool }) => {
+const Toolbar = ({ selectTool, selectedTool, color }) => {
+    if (selectedTool && selectedTool.color) {
+        selectedTool.color = color;
+    }
+
     function handleClick(toolType) {
         selectTool(toolType);
     }
@@ -33,6 +38,7 @@ const Toolbar = ({ selectTool, selectedTool }) => {
             <Tool name="Rectangle" />
             <Tool name="Hand Tool" />
             <Tool name="Zoom Tool" />
+            <VisibleColorPicker />
         </StyledToolbar>
     );
 };

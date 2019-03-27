@@ -3,9 +3,11 @@ import { TOOL_TYPES } from '../actions';
 class Brush {
     isDrawing = false;
     context = null;
+
     name = TOOL_TYPES.BRUSH_TOOL;
     size = 13;
-    opacity = 60;
+    opacity = 100;
+    color = '#000';
 
     setContext = context => {
         this.context = context;
@@ -16,6 +18,7 @@ class Brush {
         this.context.lineWidth = this.size;
         this.context.lineJoin = 'round';
         this.context.lineCap = 'round';
+        this.context.strokeStyle = this.color;
         this.context.globalAlpha = this.opacity / 100;
         this.context.moveTo(event.offsetX, event.offsetY);
     };
