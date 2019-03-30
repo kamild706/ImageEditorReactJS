@@ -1,32 +1,28 @@
 import { TOOL_TYPES } from '../actions';
+import ClickMonitor from './ClickMonitor';
 
 class Brush {
     isDrawing = false;
-    context = null;
 
     name = TOOL_TYPES.BRUSH_TOOL;
     size = 13;
     opacity = 100;
     color = '#000';
 
-    setContext = context => {
-        this.context = context;
-    };
-
-    onmousedown = event => {
+    onmousedown = (event, context) => {
         this.isDrawing = true;
-        this.context.lineWidth = this.size;
-        this.context.lineJoin = 'round';
-        this.context.lineCap = 'round';
-        this.context.strokeStyle = this.color;
-        this.context.globalAlpha = this.opacity / 100;
-        this.context.moveTo(event.offsetX, event.offsetY);
+        context.lineWidth = this.size;
+        context.lineJoin = 'round';
+        context.lineCap = 'round';
+        context.strokeStyle = this.color;
+        context.globalAlpha = this.opacity / 100;
+        context.moveTo(event.offsetX, event.offsetY);
     };
 
-    onmousemove = event => {
+    onmousemove = (event, context) => {
         if (this.isDrawing) {
-            this.context.lineTo(event.offsetX, event.offsetY);
-            this.context.stroke();
+            context.lineTo(event.offsetX, event.offsetY);
+            context.stroke();
         }
     };
 
@@ -36,6 +32,13 @@ class Brush {
 
     onmouseleave = event => {
         this.isDrawing = false;
+    };
+
+    onmouseenter = (event, context) => {
+        if (ClickMonitor.leftButtonPressed) {
+            this.isDrawing = true;
+            context.moveTo(event.offsetX, event.offsetY);
+        }
     };
 }
 

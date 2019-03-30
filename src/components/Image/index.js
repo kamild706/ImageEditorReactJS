@@ -2,13 +2,15 @@ import React from 'react';
 import { Wrapper } from './elements';
 import EditableCanvasLayer from '../../containers/EditableCanvasLayer';
 
-export const Image = ({ width, height, layers }) => {
-    if (width && height)
+export const Image = ({ id, width, height, layers }) => {
+    // if (width && height)
+    if (id)
         return (
             <Wrapper width={width} height={height}>
                 {layers &&
                     layers.map((layer, index) => (
                         <EditableCanvasLayer
+                            key={layer.id}
                             width={width}
                             height={height}
                             index={index}

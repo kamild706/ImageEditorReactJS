@@ -51,7 +51,7 @@ class Editor extends Component {
                         >
                             <EditorBlock>
                                 <OpenFiles />
-                                <ImageArea>
+                                <ImageArea id="editor">
                                     <VisibleImage />
                                 </ImageArea>
                             </EditorBlock>

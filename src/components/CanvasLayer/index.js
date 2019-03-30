@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Layer } from './elements';
+import ClickMonitor from '../../tools/ClickMonitor';
 
 export class CanvasLayer extends Component {
-    state = {
-        listenersActive: false
-    };
     layer = React.createRef();
 
     fillCanvas = () => {
@@ -20,11 +18,12 @@ export class CanvasLayer extends Component {
             image.onload = () => {
                 context.drawImage(image, 0, 0);
             };
-        } else {
-            // context.fillStyle = 'white';
-            // context.fillRect(0, 0, canvas.width, canvas.height);
         }
     };
+
+    shouldComponentUpdate(nextProps) {
+        if (nextProps != null) return false;
+    }
 
     componentDidMount() {
         this.fillCanvas();
@@ -33,9 +32,6 @@ export class CanvasLayer extends Component {
 
     componentDidUpdate() {
         this.fillCanvas();
-        if (!this.state.listenersActive) {
-            this.setupListeners();
-        }
     }
 
     componentWillUnmount() {
@@ -44,20 +40,15 @@ export class CanvasLayer extends Component {
 
     setupListeners() {
         const canvas = this.layer.current;
-        const context = canvas.getContext('2d');
-        const tool = this.props.tool;
+        canvas.addEventListener('mousedown', this.onMouseDown);
+        canvas.addEventListener('mousemove', this.onMouseMove);
+        canvas.addEventListener('mouseup', this.onMouseUp);
+        canvas.addEventListener('mouseleave', this.onMouseLeave);
+        canvas.addEventListener('mouseenter', this.onMouseEnter);
 
-        if (tool) {
-            this.setState({
-                listenersActive: true
-            });
-
-            tool.setContext(context);
-            canvas.addEventListener('mousedown', this.onMouseDown);
-            canvas.addEventListener('mousemove', this.onMouseMove);
-            canvas.addEventListener('mouseup', this.onMouseUp);
-            canvas.addEventListener('mouseleave', this.onMouseLeave);
-        }
+        const editor = document.getElementById('editor');
+        editor.addEventListener('mousedown', ClickMonitor.onButtonPressed);
+        editor.addEventListener('mouseup', ClickMonitor.onButtonReleased);
     }
 
     removeListeners() {
@@ -66,22 +57,41 @@ export class CanvasLayer extends Component {
         canvas.removeEventListener('mousemove', this.onMouseMove);
         canvas.removeEventListener('mouseup', this.onMouseUp);
         canvas.removeEventListener('mouseleave', this.onMouseLeave);
+        canvas.removeEventListener('mouseenter', this.onMouseEnter);
+
+        const editor = document.getElementById('editor');
+        editor.removeEventListener('mousedown', ClickMonitor.onButtonPressed);
+        editor.removeEventListener('mouseup', ClickMonitor.onButtonReleased);
     }
 
     onMouseDown = event => {
-        this.props.tool.onmousedown(event);
+        const { tool } = this.props;
+        const context = this.layer.current.getContext('2d');
+        if (tool) tool.onmousedown(event, context);
     };
 
     onMouseMove = event => {
-        this.props.tool.onmousemove(event);
+        const { tool } = this.props;
+        const context = this.layer.current.getContext('2d');
+        if (tool) tool.onmousemove(event, context);
     };
 
     onMouseUp = event => {
-        this.props.tool.onmouseup(event);
+        const { tool } = this.props;
+        if (tool) tool.onmouseup(event);
     };
 
     onMouseLeave = event => {
-        this.props.tool.onmouseleave(event);
+        const { tool } = this.props;
+        if (tool) tool.onmouseleave(event);
+    };
+
+    onMouseEnter = event => {
+        const { tool } = this.props;
+        const context = this.layer.current.getContext('2d');
+        if (tool) {
+            tool.onmouseenter(event, context);
+        }
     };
 
     render() {
