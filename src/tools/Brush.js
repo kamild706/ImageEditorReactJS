@@ -16,6 +16,7 @@ class Brush {
         context.lineCap = 'round';
         context.strokeStyle = this.color;
         context.globalAlpha = this.opacity / 100;
+        context.beginPath();
         context.moveTo(event.offsetX, event.offsetY);
     };
 

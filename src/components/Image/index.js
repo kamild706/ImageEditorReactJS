@@ -10,6 +10,7 @@ export const Image = ({ id, width, height, layers }) => {
                 {layers &&
                     layers.map((layer, index) => (
                         <EditableCanvasLayer
+                            id={`canvas${index}`}
                             key={layer.id}
                             width={width}
                             height={height}

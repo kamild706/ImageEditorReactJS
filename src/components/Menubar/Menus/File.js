@@ -46,6 +46,24 @@ export default class File extends Component {
         this.localFilePicker.current.click();
     };
 
+    downloadImage = event => {
+        event.preventDefault();
+        const canvas = document.querySelector('#canvas0');
+
+        canvas.toBlob(blob => {
+            var a = document.createElement('a'),
+                url = URL.createObjectURL(blob);
+            a.href = url;
+            a.download = 'image.png';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function() {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 0);
+        });
+    };
+
     render() {
         return (
             <>
@@ -61,7 +79,7 @@ export default class File extends Component {
                             onClick={this.openLocalFilePicker}
                         />
                     </SubMenuItem>
-                    <SubMenuItem name="Save" />
+                    <SubMenuItem name="Save" onClick={this.downloadImage} />
                 </MenuItem>
                 <LocalFilePicker
                     ref={this.localFilePicker}
