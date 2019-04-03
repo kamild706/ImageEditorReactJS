@@ -1,27 +1,27 @@
-import { TYPES } from '../actions';
+import { TYPES } from "../actions";
 
 const image = (state = {}, action) => {
     switch (action.type) {
         case TYPES.CREATE_NEW_IMAGE:
             return {
-                id: new Date().getTime(),
+                id: action.createdAt,
                 width: action.width,
                 height: action.height,
                 layers: [
                     {
-                        id: new Date().getTime(),
+                        id: action.createdAt,
                         contents: null
                     }
                 ]
             };
-        case TYPES.LOAD_IMAGE_FROM_LOCAL_FILE:
+        case TYPES.RECEIVE_IMAGE:
             return {
-                id: new Date().getTime(),
+                id: action.createdAt,
                 width: action.width,
                 height: action.height,
                 layers: [
                     {
-                        id: new Date().getTime(),
+                        id: action.createdAt,
                         contents: action.contents
                     }
                 ]

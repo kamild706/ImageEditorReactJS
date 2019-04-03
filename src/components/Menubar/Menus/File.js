@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import MenuItem from '../MenuItem';
-import SubMenuItem from '../SubMenuItem';
-import NewFileModal from '../../Modals/NewFileModal';
-import { LocalFilePicker } from './elements';
+import React, { Component } from "react";
+import MenuItem from "../MenuItem";
+import SubMenuItem from "../SubMenuItem";
+import NewFileModal from "../../Modals/NewFileModal";
+import { LocalFilePicker } from "./elements";
 
 export default class File extends Component {
     constructor(props) {
@@ -23,23 +23,11 @@ export default class File extends Component {
 
     loadLocalFile = event => {
         const file = this.localFilePicker.current.files[0];
-        const reader = new FileReader();
-
         if (file) {
-            reader.readAsDataURL(file);
+            this.props.loadImageFromLocalFile(file);
+        } else {
+            alert("Provided file is not supported.");
         }
-
-        reader.addEventListener('load', () => {
-            const image = new Image();
-            image.src = reader.result;
-            image.onload = () => {
-                this.props.loadImageFromLocalFile(
-                    reader.result,
-                    image.width,
-                    image.height
-                );
-            };
-        });
     };
 
     openLocalFilePicker = event => {
@@ -48,13 +36,13 @@ export default class File extends Component {
 
     downloadImage = event => {
         event.preventDefault();
-        const canvas = document.querySelector('#canvas0');
+        const canvas = document.querySelector("#canvas0");
 
         canvas.toBlob(blob => {
-            var a = document.createElement('a'),
+            var a = document.createElement("a"),
                 url = URL.createObjectURL(blob);
             a.href = url;
-            a.download = 'image.png';
+            a.download = "image.png";
             document.body.appendChild(a);
             a.click();
             setTimeout(function() {
@@ -70,7 +58,7 @@ export default class File extends Component {
                 <MenuItem name="File">
                     <SubMenuItem
                         name="New"
-                        onClick={e => this.openModal('newFileModal', true)}
+                        onClick={e => this.openModal("newFileModal", true)}
                     />
                     <SubMenuItem name="Open">
                         <SubMenuItem name="From URL" />
@@ -87,7 +75,7 @@ export default class File extends Component {
                 />
                 {this.state.newFileModalOpen ? (
                     <NewFileModal
-                        onClose={e => this.openModal('newFileModal', false)}
+                        onClose={e => this.openModal("newFileModal", false)}
                         isOpen={true}
                         onConfirm={this.props.createNewImage}
                     />
