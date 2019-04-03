@@ -1,6 +1,5 @@
 export const TYPES = {
     CREATE_NEW_IMAGE: "CREATE_NEW_IMAGE",
-    LOAD_IMAGE_FROM_LOCAL_FILE: "LOAD_IMAGE_FROM_LOCAL_FILE",
     RECEIVE_IMAGE: "RECEIVE_IMAGE",
     SELECT_TOOL: "SELECT_TOOL",
     SELECT_COLOR: "SELECT_COLOR"
@@ -19,13 +18,26 @@ export const createNewImage = (width, height) => ({
 
 export const loadImageFromLocalFile = file => dispatch => {
     const reader = new FileReader();
-    reader.readAsDataURL(file);
     reader.addEventListener("load", () => {
         const image = new Image();
         image.src = reader.result;
         image.onload = () => {
             dispatch(receiveImage(reader.result, image.width, image.height));
         };
+    });
+    return reader.readAsDataURL(file);
+};
+
+export const fetchImage = url => dispatch => {
+    return fetch(url).then(response => {
+        response.blob().then(result => {
+            const base64img = URL.createObjectURL(result);
+            const image = new Image();
+            image.src = base64img;
+            image.onload = () => {
+                dispatch(receiveImage(base64img, image.width, image.height));
+            };
+        });
     });
 };
 

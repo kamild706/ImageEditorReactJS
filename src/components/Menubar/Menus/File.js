@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import MenuItem from "../MenuItem";
 import SubMenuItem from "../SubMenuItem";
 import NewFileModal from "../../Modals/NewFileModal";
+import LoadFromUrlModal from "../../Modals/LoadFromUrlModal";
 import { LocalFilePicker } from "./elements";
 
 export default class File extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            newFileModalOpen: false
+            newFileModalOpen: false,
+            loadFromUrlModalOpen: false
         };
 
         this.localFilePicker = React.createRef();
@@ -61,7 +63,12 @@ export default class File extends Component {
                         onClick={e => this.openModal("newFileModal", true)}
                     />
                     <SubMenuItem name="Open">
-                        <SubMenuItem name="From URL" />
+                        <SubMenuItem
+                            name="From URL"
+                            onClick={e =>
+                                this.openModal("loadFromUrlModal", true)
+                            }
+                        />
                         <SubMenuItem
                             name="From disk"
                             onClick={this.openLocalFilePicker}
@@ -78,6 +85,13 @@ export default class File extends Component {
                         onClose={e => this.openModal("newFileModal", false)}
                         isOpen={true}
                         onConfirm={this.props.createNewImage}
+                    />
+                ) : null}
+                {this.state.loadFromUrlModalOpen ? (
+                    <LoadFromUrlModal
+                        onClose={e => this.openModal("loadFromUrlModal", false)}
+                        isOpen={true}
+                        onConfirm={this.props.fetchImage}
                     />
                 ) : null}
             </>
