@@ -1,75 +1,75 @@
-import React, { Component } from 'react';
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
-import Header from './Header';
-import Editor from './Editor';
+import React, { Component } from "react";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
+import Header from "./Header";
+import VisibleEditor from "../containers/VisibleEditor";
 
 const blackTheme = {
     header: {
-        color: 'white',
-        backgroundColor: '#474747'
+        color: "white",
+        backgroundColor: "#474747"
     },
     menubar: {
-        borderBottomColor: 'black',
-        UlBackgroundColor: 'transparent',
-        UlColor: 'white'
+        borderBottomColor: "black",
+        UlBackgroundColor: "transparent",
+        UlColor: "white"
     },
     menuItem: {
-        backgroundColor: '#222',
+        backgroundColor: "#222",
         dropdown: {
-            backgroundColor: 'white',
-            hoverBackgroundColor: '#5194ff',
-            dropdown: 'grey'
+            backgroundColor: "white",
+            hoverBackgroundColor: "#5194ff",
+            dropdown: "grey"
         },
         nestedDropdown: {
-            backgroundColor: 'white',
-            borderLeft: '#222'
+            backgroundColor: "white",
+            borderLeft: "#222"
         }
     },
     toolbar: {
-        borderTopColor: '#222',
-        backgroundColor: '#474747',
+        borderTopColor: "#222",
+        backgroundColor: "#474747",
         button: {
-            backgroundColor: 'transparent',
-            color: 'white',
-            hoverBackgroundColor: '#222'
+            backgroundColor: "transparent",
+            color: "white",
+            hoverBackgroundColor: "#222"
         }
     },
     editor: {
-        resizerColor: '#222'
+        resizerColor: "#222"
     },
     rightbar: {
-        borderTopColor: '#222',
-        backgroundColor: '#474747'
+        borderTopColor: "#222",
+        backgroundColor: "#474747"
     },
     openfiles: {
-        backgroundColor: '#303030'
+        backgroundColor: "#303030"
     },
     imagearea: {
-        backgroundColor: '#252525'
+        backgroundColor: "#252525"
     },
     image: {
-        defaultColor: 'white'
+        defaultColor: "white"
     },
     modalDialog: {
-        backgroundColor: '#474747',
-        inputBackgroundColor: '#252525',
-        buttonBackgroundColor: '#606060'
+        backgroundColor: "#474747",
+        inputBackgroundColor: "#252525",
+        buttonBackgroundColor: "#606060"
     },
     toolDetails: {
-        textColor: 'white',
+        textColor: "white",
         button: {
-            backgroundColor: 'initial'
+            backgroundColor: "initial"
         },
         input: {
-            backgroundColor: '#222'
+            backgroundColor: "#222"
         },
         sizePicker: {
-            backgroundColor: '#474747',
-            borderColor: '#222'
+            backgroundColor: "#474747",
+            borderColor: "#222"
         }
     },
     colorPicker: {
-        selectedColorBackground: '#252525'
+        selectedColorBackground: "#252525"
     }
 };
 
@@ -100,7 +100,7 @@ class App extends Component {
                 <ThemeProvider theme={blackTheme}>
                     <>
                         <Header />
-                        <Editor />
+                        <VisibleEditor />
                     </>
                 </ThemeProvider>
             </>

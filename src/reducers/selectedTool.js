@@ -1,8 +1,10 @@
-import { TYPES, TOOL_TYPES } from '../actions';
-import { brush } from '../tools/Brush';
+import { TYPES, TOOL_TYPES } from "../actions";
+import { brush } from "../tools/Brush";
+import { hand } from "../tools/Hand";
 
 const tools = {};
 tools[TOOL_TYPES.BRUSH_TOOL] = brush;
+tools[TOOL_TYPES.HAND_TOOL] = hand;
 
 const selectedTool = (state = null, action) => {
     switch (action.type) {

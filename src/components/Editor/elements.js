@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import { TOOL_TYPES } from "../../actions";
 
 export const Wrapper = styled.main`
     .Resizer {
@@ -51,4 +52,8 @@ export const ImageArea = styled.div`
     overflow: auto;
     display: flex;
     align-items: center;
+    cursor: ${props =>
+        props.tool && props.tool.name === TOOL_TYPES.HAND_TOOL
+            ? "grab"
+            : "crosshair"};
 `;

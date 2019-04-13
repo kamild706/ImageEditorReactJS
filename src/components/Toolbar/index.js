@@ -1,8 +1,8 @@
-import React from 'react';
-import { StyledToolbar } from './elements';
-import Tool from './Tool';
-import { TOOL_TYPES } from '../../actions';
-import VisibleColorPicker from '../../containers/VisibleColorPicker';
+import React from "react";
+import { StyledToolbar } from "./elements";
+import Tool from "./Tool";
+import { TOOL_TYPES } from "../../actions";
+import VisibleColorPicker from "../../containers/VisibleColorPicker";
 
 const Toolbar = ({ selectTool, selectedTool, color }) => {
     if (selectedTool && selectedTool.color) {
@@ -24,7 +24,7 @@ const Toolbar = ({ selectTool, selectedTool, color }) => {
             <Tool name="Spot Healing Brush Tool" />
             <Tool
                 name="Brush Tool"
-                onClick={handleClick.bind(null, TOOL_TYPES.BRUSH_TOOL)}
+                onClick={() => handleClick(TOOL_TYPES.BRUSH_TOOL)}
                 selected={selectedTool && selectedTool.name}
             />
             <Tool name="Clone Tool" />
@@ -36,7 +36,11 @@ const Toolbar = ({ selectTool, selectedTool, color }) => {
             <Tool name="Pen" />
             <Tool name="Path Select" />
             <Tool name="Rectangle" />
-            <Tool name="Hand Tool" />
+            <Tool
+                name="Hand Tool"
+                onClick={() => handleClick(TOOL_TYPES.HAND_TOOL)}
+                selected={selectedTool && selectedTool.name}
+            />
             <Tool name="Zoom Tool" />
             <VisibleColorPicker />
         </StyledToolbar>
