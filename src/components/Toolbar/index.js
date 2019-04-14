@@ -28,7 +28,11 @@ const Toolbar = ({ selectTool, selectedTool, color }) => {
                 selected={selectedTool && selectedTool.name}
             />
             <Tool name="Clone Tool" />
-            <Tool name="Eraser Tool" />
+            <Tool
+                name="Eraser Tool"
+                onClick={() => handleClick(TOOL_TYPES.ERASER_TOOL)}
+                selected={selectedTool && selectedTool.name}
+            />
             <Tool name="Gradient Tool" />
             <Tool name="Blur Tool" />
             <Tool name="Dodge Tool" />

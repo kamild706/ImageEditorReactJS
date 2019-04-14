@@ -7,7 +7,8 @@ export const TYPES = {
 
 export const TOOL_TYPES = {
     BRUSH_TOOL: "BRUSH_TOOL",
-    HAND_TOOL: "HAND_TOOL"
+    HAND_TOOL: "HAND_TOOL",
+    ERASER_TOOL: "ERASER_TOOL"
 };
 
 export const createNewImage = (width, height) => ({

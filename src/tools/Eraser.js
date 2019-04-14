@@ -1,22 +1,20 @@
 import { TOOL_TYPES } from "../actions";
 import ClickMonitor from "./ClickMonitor";
 
-class Brush {
+class Eraser {
     isDrawing = false;
 
-    name = TOOL_TYPES.BRUSH_TOOL;
+    name = TOOL_TYPES.ERASER_TOOL;
     size = 13;
-    opacity = 100;
-    color = "#000";
+    _color = "#fff";
 
     onmousedown = (event, context) => {
         this.isDrawing = true;
         context.lineWidth = this.size;
         context.lineJoin = "round";
         context.lineCap = "round";
-        context.globalCompositeOperation = "source-over";
-        context.strokeStyle = this.color;
-        context.globalAlpha = this.opacity / 100;
+        context.strokeStyle = this._color;
+        context.globalCompositeOperation = "destination-out";
         context.beginPath();
         context.moveTo(event.offsetX, event.offsetY);
     };
@@ -44,4 +42,4 @@ class Brush {
     };
 }
 
-export const brush = new Brush();
+export const eraser = new Eraser();

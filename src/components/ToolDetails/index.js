@@ -1,14 +1,16 @@
-import React from 'react';
-import { ToolDetailsBar, ToolIcon, Icon } from './elements';
-import { TOOL_TYPES } from '../../actions';
-import { BrushToolDetails } from './BrushToolDetails';
+import React from "react";
+import { ToolDetailsBar, ToolIcon, Icon } from "./elements";
+import { TOOL_TYPES } from "../../actions";
+import { BrushToolDetails } from "./BrushToolDetails";
+import { EraserToolDetails } from "./EraserToolDetails";
 
 const COMPONENTS = {};
 COMPONENTS[TOOL_TYPES.BRUSH_TOOL] = <BrushToolDetails />;
+COMPONENTS[TOOL_TYPES.ERASER_TOOL] = <EraserToolDetails />;
 
 const ToolDetails = ({ selectedTool, path }) => {
     function computePath() {
-        let computedName = selectedTool.name.toLowerCase().replace(/_/g, '-');
+        let computedName = selectedTool.name.toLowerCase().replace(/_/g, "-");
         return `icons/${computedName}.png`;
     }
 
