@@ -9,7 +9,7 @@ class Brush {
     opacity = 100;
     color = "#000";
 
-    onmousedown = (event, context) => {
+    onmousedown = ({ offsetX, offsetY }, context) => {
         this.isDrawing = true;
         context.lineWidth = this.size;
         context.lineJoin = "round";
@@ -18,12 +18,12 @@ class Brush {
         context.strokeStyle = this.color;
         context.globalAlpha = this.opacity / 100;
         context.beginPath();
-        context.moveTo(event.offsetX, event.offsetY);
+        context.moveTo(offsetX, offsetY);
     };
 
-    onmousemove = (event, context) => {
+    onmousemove = ({ offsetX, offsetY }, context) => {
         if (this.isDrawing) {
-            context.lineTo(event.offsetX, event.offsetY);
+            context.lineTo(offsetX, offsetY);
             context.stroke();
         }
     };
@@ -36,10 +36,10 @@ class Brush {
         this.isDrawing = false;
     };
 
-    onmouseenter = (event, context) => {
+    onmouseenter = ({ offsetX, offsetY }, context) => {
         if (ClickMonitor.leftButtonPressed) {
             this.isDrawing = true;
-            context.moveTo(event.offsetX, event.offsetY);
+            context.moveTo(offsetX, offsetY);
         }
     };
 }

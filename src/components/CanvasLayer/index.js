@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Layer } from "./elements";
 import ClickMonitor from "../../tools/ClickMonitor";
+import { scale } from "../Editor";
 
 export class CanvasLayer extends Component {
     layer = React.createRef();
@@ -67,30 +68,50 @@ export class CanvasLayer extends Component {
     onMouseDown = event => {
         const { tool } = this.props;
         const context = this.layer.current.getContext("2d");
-        if (tool && tool.onmousedown) tool.onmousedown(event, context);
+        const pos = {
+            offsetX: event.offsetX / scale,
+            offsetY: event.offsetY / scale
+        };
+        if (tool && tool.onmousedown) tool.onmousedown(pos, context);
     };
 
     onMouseMove = event => {
         const { tool } = this.props;
         const context = this.layer.current.getContext("2d");
-        if (tool && tool.onmousemove) tool.onmousemove(event, context);
+        const pos = {
+            offsetX: event.offsetX / scale,
+            offsetY: event.offsetY / scale
+        };
+        if (tool && tool.onmousemove) tool.onmousemove(pos, context);
     };
 
     onMouseUp = event => {
         const { tool } = this.props;
-        if (tool && tool.onmouseup) tool.onmouseup(event);
+        const pos = {
+            offsetX: event.offsetX / scale,
+            offsetY: event.offsetY / scale
+        };
+        if (tool && tool.onmouseup) tool.onmouseup(pos);
     };
 
     onMouseLeave = event => {
         const { tool } = this.props;
-        if (tool && tool.onmouseleave) tool.onmouseleave(event);
+        const pos = {
+            offsetX: event.offsetX / scale,
+            offsetY: event.offsetY / scale
+        };
+        if (tool && tool.onmouseleave) tool.onmouseleave(pos);
     };
 
     onMouseEnter = event => {
         const { tool } = this.props;
         const context = this.layer.current.getContext("2d");
         if (tool && tool.onmouseenter) {
-            tool.onmouseenter(event, context);
+            const pos = {
+                offsetX: event.offsetX / scale,
+                offsetY: event.offsetY / scale
+            };
+            tool.onmouseenter(pos, context);
         }
     };
 

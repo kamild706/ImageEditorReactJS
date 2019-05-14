@@ -45,7 +45,11 @@ const Toolbar = ({ selectTool, selectedTool, color }) => {
                 onClick={() => handleClick(TOOL_TYPES.HAND_TOOL)}
                 selected={selectedTool && selectedTool.name}
             />
-            <Tool name="Zoom Tool" />
+            <Tool
+                name="Zoom Tool"
+                onClick={() => handleClick(TOOL_TYPES.ZOOM_TOOL)}
+                selected={selectedTool && selectedTool.name}
+            />
             <VisibleColorPicker />
         </StyledToolbar>
     );
