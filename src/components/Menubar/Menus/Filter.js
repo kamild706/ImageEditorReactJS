@@ -1,55 +1,33 @@
-import React, { Component } from 'react';
-import MenuItem from '../MenuItem';
-import SubMenuItem from '../SubMenuItem';
+import React, { Component } from "react";
+import MenuItem from "../MenuItem";
+import SubMenuItem from "../SubMenuItem";
 
 export default class Filter extends Component {
+    getImageData = () => {
+        const canvas = document.getElementById("canvas0");
+        const data = canvas.toDataURL();
+        const index = data.indexOf("base64");
+        return data.substring(index + 7);
+    };
+
     render() {
+        const { applyFilter } = this.props;
         return (
             <MenuItem name="Filter">
-                <SubMenuItem name="Liquify" />
-                <SubMenuItem name="Blur">
-                    <SubMenuItem name="Average" />
-                    <SubMenuItem name="Blur" />
-                    <SubMenuItem name="Box Blur" />
-                    <SubMenuItem name="Gaussian Blur" />
-                    <SubMenuItem name="Motion Blur" />
-                    <SubMenuItem name="Radial Blur" />
+                <SubMenuItem name="Gradient">
+                    <SubMenuItem name="Linear" />
+                    <SubMenuItem name="Radial" />
                 </SubMenuItem>
-                <SubMenuItem name="Distort">
-                    <SubMenuItem name="Displace" />
-                    <SubMenuItem name="Pinch" />
-                    <SubMenuItem name="Polar Coordinates" />
-                    <SubMenuItem name="Ripple" />
-                    <SubMenuItem name="Shear" />
-                </SubMenuItem>
-                <SubMenuItem name="Noise">
-                    <SubMenuItem name="Add Noise" />
-                    <SubMenuItem name="Dust &amp; Scratches" />
-                    <SubMenuItem name="Median" />
-                </SubMenuItem>
-                <SubMenuItem name="Pixelate">
-                    <SubMenuItem name="Color Halftone" />
-                    <SubMenuItem name="Mosaic" />
-                </SubMenuItem>
-                <SubMenuItem name="Render">
-                    <SubMenuItem name="Clouds" />
-                    <SubMenuItem name="Difference Clouds" />
-                </SubMenuItem>
-                <SubMenuItem name="Sharpen">
-                    <SubMenuItem name="Sharpen" />
-                    <SubMenuItem name="Sharpen More" />
-                    <SubMenuItem name="Unsharp Mask" />
-                </SubMenuItem>
-                <SubMenuItem name="Stylize">
-                    <SubMenuItem name="Find Edges" />
-                </SubMenuItem>
-                <SubMenuItem name="Other">
-                    <SubMenuItem name="High Pass" />
-                    <SubMenuItem name="Maximum" />
-                    <SubMenuItem name="Minimum" />
-                    <SubMenuItem name="offset" />
-                    <SubMenuItem name="Repeat" />
-                </SubMenuItem>
+                <SubMenuItem name="KMM" onClick={() => applyFilter(this.getImageData(), "kmm")} />
+                <SubMenuItem name="Distort" onClick={() => applyFilter(this.getImageData(), "distort")} />
+                <SubMenuItem name="Histogram" />
+                <SubMenuItem name="Black White" onClick={() => applyFilter(this.getImageData(), "blackwhite")} />
+                <SubMenuItem name="Blend" />
+                <SubMenuItem name="Half blend" />
+                <SubMenuItem name="Min RGB" onClick={() => applyFilter(this.getImageData(), "minrgb")} />
+                <SubMenuItem name="Median" />
+                <SubMenuItem name="Convolution" />
+                <SubMenuItem name="Pixelate" />
             </MenuItem>
         );
     }

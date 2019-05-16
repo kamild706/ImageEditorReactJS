@@ -1,8 +1,12 @@
+const SERVER_URL = "https://localhost:44300";
+
 export const TYPES = {
     CREATE_NEW_IMAGE: "CREATE_NEW_IMAGE",
     RECEIVE_IMAGE: "RECEIVE_IMAGE",
     SELECT_TOOL: "SELECT_TOOL",
-    SELECT_COLOR: "SELECT_COLOR"
+    SELECT_COLOR: "SELECT_COLOR",
+    UPDATE_IMAGE_CONTENTS: "UPDATE_IMAGE_CONTENTS",
+    UPDATE_IMAGE_ID: "UPDATE_IMAGE_ID"
 };
 
 export const TOOL_TYPES = {
@@ -52,6 +56,17 @@ export const receiveImage = (contents, width, height) => ({
     createdAt: new Date().getTime()
 });
 
+const updateImageContents = contents => ({
+    type: TYPES.UPDATE_IMAGE_CONTENTS,
+    contents,
+    createdAt: new Date().getTime()
+});
+
+const updateImageId = id => ({
+    type: TYPES.UPDATE_IMAGE_ID,
+    id
+});
+
 export const selectTool = toolType => ({
     type: TYPES.SELECT_TOOL,
     toolType
@@ -61,3 +76,62 @@ export const selectColor = color => ({
     type: TYPES.SELECT_COLOR,
     color
 });
+
+const applyFilterRequest = (imgId, filterURL, body = {}) => {
+    body.pictureId = imgId;
+    return fetch(`${SERVER_URL}/manipulations/${filterURL}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    });
+};
+
+export const applyFilter = (imgData, filterURL, params = {}) => (dispatch, getState) => {
+    const { databaseId: id } = getState().image;
+    if (id) {
+        updateImageOnServer(id, imgData).then(() => {
+            applyFilterRequest(id, filterURL, params)
+                .then(response => response.text())
+                .then(contents => {
+                    dispatch(updateImageContents(contents));
+                });
+        });
+    } else {
+        saveImageOnServer(new Date().getMilliseconds(), imgData, "image/png").then(id => {
+            applyFilterRequest(id, filterURL, params)
+                .then(response => response.text())
+                .then(contents => {
+                    dispatch(updateImageContents(contents));
+                    dispatch(updateImageId(id));
+                });
+        });
+    }
+};
+
+const updateImageOnServer = (id, image) => {
+    return fetch(`${SERVER_URL}/pictures/edit/${id}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            Base64: image
+        })
+    });
+};
+
+const saveImageOnServer = (filename, image, type) => {
+    return fetch(`${SERVER_URL}/pictures/create`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            FileName: filename,
+            FileType: type,
+            Base64: image
+        })
+    }).then(response => response.text());
+};

@@ -1,13 +1,7 @@
 import React, { Component } from "react";
 import { Wrapper } from "./elements";
 import SplitPane from "react-split-pane";
-import {
-    MainBlock,
-    EditorBlock,
-    OpenFiles,
-    ImageArea,
-    RightBar
-} from "./elements";
+import { MainBlock, EditorBlock, OpenFiles, ImageArea, RightBar } from "./elements";
 import VisibleImage from "../../containers/VisibleImage";
 import ClickableToolbar from "../../containers/ClickableToolbar";
 import { TOOL_TYPES } from "../../actions";
@@ -30,23 +24,10 @@ class Editor extends Component {
         }
     };
 
-    toggleZooming = isEnable => {
-        if (isEnable) {
-            this.editorRef.addEventListener("mousedown", this.onMouseDown);
-            this.editorRef.addEventListener("mouseup", this.onMouseUp);
-            this.editorRef.addEventListener("mousemove", this.onMouseMove);
-        } else {
-            this.editorRef.removeEventListener("mousedown", this.onMouseDown);
-            this.editorRef.removeEventListener("mouseup", this.onMouseUp);
-            this.editorRef.removeEventListener("mousemove", this.onMouseMove);
-        }
-    };
-
     onMouseDown = event => {
         const { clientX, clientY } = event;
         const { tool } = this.props;
         if (tool.name === TOOL_TYPES.HAND_TOOL) {
-            console.log("hreeerer");
             const { scrollLeft, scrollTop } = this.editorRef;
             this.setState({
                 isScrolling: true,
@@ -65,21 +46,12 @@ class Editor extends Component {
     };
 
     onMouseMove = event => {
-        const {
-            scrollLeft,
-            scrollTop,
-            clientX,
-            clientY,
-            isScrolling,
-            isZooming
-        } = this.state;
+        const { scrollLeft, scrollTop, clientX, clientY, isScrolling, isZooming } = this.state;
         if (isScrolling) {
-            console.log("dfsddsdfs");
             this.editorRef.scrollLeft = scrollLeft + (clientX - event.clientX);
             this.editorRef.scrollTop = scrollTop + (clientY - event.clientY);
         }
         if (isZooming) {
-            console.log("xds");
             let distance = event.clientX - clientX;
             let factor = 1000;
             if (event.clientX > clientX) {
@@ -90,7 +62,6 @@ class Editor extends Component {
                 if (distance < startX) scale += distance / factor;
             }
             startX = distance;
-            console.log("scale", scale);
             const canvas = document.getElementById("canvas0");
             let { parentElement } = canvas;
             const width = Number(parentElement.attributes[0].nodeValue);
@@ -112,20 +83,12 @@ class Editor extends Component {
     componentDidMount() {
         window.addEventListener("resize", this.resize, false);
         const { tool } = this.props;
-        this.toggleScrolling(
-            tool &&
-                (tool.name === TOOL_TYPES.HAND_TOOL ||
-                    tool.name === TOOL_TYPES.ZOOM_TOOL)
-        );
+        this.toggleScrolling(tool && (tool.name === TOOL_TYPES.HAND_TOOL || tool.name === TOOL_TYPES.ZOOM_TOOL));
     }
 
     componentDidUpdate() {
         const { tool } = this.props;
-        this.toggleScrolling(
-            tool &&
-                (tool.name === TOOL_TYPES.HAND_TOOL ||
-                    tool.name === TOOL_TYPES.ZOOM_TOOL)
-        );
+        this.toggleScrolling(tool && (tool.name === TOOL_TYPES.HAND_TOOL || tool.name === TOOL_TYPES.ZOOM_TOOL));
     }
 
     componentWillUnmount() {
@@ -140,13 +103,7 @@ class Editor extends Component {
     render() {
         return (
             <Wrapper>
-                <SplitPane
-                    split="vertical"
-                    defaultSize={40}
-                    minSize={40}
-                    maxSize={80}
-                    step={40}
-                >
+                <SplitPane split="vertical" defaultSize={40} minSize={40} maxSize={80} step={40}>
                     <ClickableToolbar />
                     <MainBlock>
                         <SplitPane
@@ -160,11 +117,7 @@ class Editor extends Component {
                         >
                             <EditorBlock>
                                 <OpenFiles />
-                                <ImageArea
-                                    id="editor"
-                                    tool={this.props.tool}
-                                    ref={node => (this.editorRef = node)}
-                                >
+                                <ImageArea id="editor" tool={this.props.tool} ref={node => (this.editorRef = node)}>
                                     <VisibleImage />
                                 </ImageArea>
                             </EditorBlock>

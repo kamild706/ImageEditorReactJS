@@ -22,10 +22,6 @@ export class CanvasLayer extends Component {
         }
     };
 
-    shouldComponentUpdate(nextProps) {
-        if (nextProps != null) return false;
-    }
-
     componentDidMount() {
         this.fillCanvas();
         this.setupListeners();
@@ -116,12 +112,6 @@ export class CanvasLayer extends Component {
     };
 
     render() {
-        return (
-            <Layer
-                ref={this.layer}
-                id={this.props.id}
-                index={this.props.index}
-            />
-        );
+        return <Layer ref={this.layer} id={this.props.id} index={this.props.index} />;
     }
 }
