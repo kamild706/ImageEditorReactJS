@@ -1,16 +1,8 @@
-import React, { Component } from 'react';
-import ReactModal from 'react-modal';
-import { Label, Main, Div } from './elements';
-import {
-    Header,
-    Input,
-    Button,
-    StyledModal,
-    CloseButton,
-    HeaderTitle
-} from '../commons';
+import React, { Component } from "react";
+import ReactModal from "react-modal";
+import { Header, Input, Button, StyledModal, CloseButton, HeaderTitle, Label, Main, Div } from "../commons";
 
-ReactModal.setAppElement('#root');
+ReactModal.setAppElement("#root");
 
 class NewFileModal extends Component {
     state = {
@@ -33,10 +25,7 @@ class NewFileModal extends Component {
 
     render() {
         return (
-            <StyledModal
-                isOpen={this.props.isOpen}
-                onRequestClose={this.props.onClose}
-            >
+            <StyledModal isOpen={this.props.isOpen} onRequestClose={this.props.onClose}>
                 <Header>
                     <HeaderTitle>New File</HeaderTitle>
                     <CloseButton onClick={this.props.onClose} />
@@ -44,23 +33,13 @@ class NewFileModal extends Component {
                 <Main>
                     <Div>
                         <Label>Width</Label>
-                        <Input
-                            onChange={this.handleInputChange}
-                            name="width"
-                            type="text"
-                            value={this.state.width}
-                        />
-                        {' px'}
+                        <Input onChange={this.handleInputChange} name="width" type="text" value={this.state.width} />
+                        {" px"}
                     </Div>
                     <Div>
                         <Label>Height</Label>
-                        <Input
-                            onChange={this.handleInputChange}
-                            name="height"
-                            type="text"
-                            value={this.state.height}
-                        />
-                        {' px'}
+                        <Input onChange={this.handleInputChange} name="height" type="text" value={this.state.height} />
+                        {" px"}
                     </Div>
                     <Button onClick={this.handleCreateRequest}>Create</Button>
                 </Main>

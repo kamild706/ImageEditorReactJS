@@ -1,20 +1,14 @@
-import styled from 'styled-components';
-import ReactModal from 'react-modal';
-import React from 'react';
+import styled from "styled-components";
+import ReactModal from "react-modal";
+import React from "react";
 
 function ReactModalAdapter({ className, modalClassName, ...props }) {
-    return (
-        <ReactModal
-            className={modalClassName}
-            portalClassName={className}
-            {...props}
-        />
-    );
+    return <ReactModal className={modalClassName} portalClassName={className} {...props} />;
 }
 
 export const StyledModal = styled(ReactModalAdapter).attrs({
-    overlayClassName: 'Overlay',
-    modalClassName: 'Modal'
+    overlayClassName: "Overlay",
+    modalClassName: "Modal"
 })`
     .Overlay {
         position: absolute;
@@ -37,15 +31,7 @@ export const StyledModal = styled(ReactModalAdapter).attrs({
 
 export const Header = styled.header`
     height: 1rem;
-    background: linear-gradient(
-        to bottom,
-        #595959 0%,
-        #626262 3%,
-        #575757 7%,
-        #3c3c3c 90%,
-        #3a3a3a 97%,
-        #2e2e2e 100%
-    );
+    background: linear-gradient(to bottom, #595959 0%, #626262 3%, #575757 7%, #3c3c3c 90%, #3a3a3a 97%, #2e2e2e 100%);
     padding: 0.8rem;
 `;
 
@@ -68,7 +54,7 @@ export const Button = styled.button`
 `;
 
 export const CloseButton = styled.span`
-    background-image: url('icons/cancel.png');
+    background-image: url("icons/cancel.png");
     filter: invert(1);
     width: 1.2rem;
     height: 1.2rem;
@@ -80,4 +66,18 @@ export const CloseButton = styled.span`
 export const HeaderTitle = styled.span`
     float: left;
     font-size: 1.1rem;
+`;
+
+export const Main = styled.main`
+    padding: 1rem;
+    height: ${props => (props.height ? props.height : "10rem")};
+`;
+
+export const Label = styled.label`
+    display: inline-block;
+    width: 4rem;
+`;
+
+export const Div = styled.div`
+    margin-bottom: 0.5rem;
 `;

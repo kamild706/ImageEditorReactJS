@@ -1,14 +1,6 @@
 import React, { Component } from "react";
 import ReactModal from "react-modal";
-import { Label, Main, Div } from "./elements";
-import {
-    Header,
-    Input,
-    Button,
-    StyledModal,
-    CloseButton,
-    HeaderTitle
-} from "../commons";
+import { Header, Input, Button, StyledModal, CloseButton, HeaderTitle, Label, Div, Main } from "../commons";
 
 ReactModal.setAppElement("#root");
 
@@ -32,23 +24,15 @@ class LocalFromUrlModel extends Component {
 
     render() {
         return (
-            <StyledModal
-                isOpen={this.props.isOpen}
-                onRequestClose={this.props.onClose}
-            >
+            <StyledModal isOpen={this.props.isOpen} onRequestClose={this.props.onClose}>
                 <Header>
                     <HeaderTitle>Load Image</HeaderTitle>
                     <CloseButton onClick={this.props.onClose} />
                 </Header>
-                <Main>
+                <Main height="5rem">
                     <Div>
                         <Label>URL</Label>
-                        <Input
-                            onChange={this.handleInputChange}
-                            name="url"
-                            type="text"
-                            value={this.state.url}
-                        />
+                        <Input onChange={this.handleInputChange} name="url" type="text" value={this.state.url} />
                     </Div>
                     <Button onClick={this.handleLoadRequest}>Load</Button>
                 </Main>
