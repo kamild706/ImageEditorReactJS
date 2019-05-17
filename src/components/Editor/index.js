@@ -7,6 +7,11 @@ import ClickableToolbar from "../../containers/ClickableToolbar";
 import { TOOL_TYPES } from "../../actions";
 export let scale = 1;
 let startX = 0;
+
+export function resetScale() {
+    scale = 1;
+}
+
 class Editor extends Component {
     state = {
         size: 350
@@ -54,12 +59,13 @@ class Editor extends Component {
         if (isZooming) {
             let distance = event.clientX - clientX;
             let factor = 1000;
+            let change = distance / factor;
             if (event.clientX > clientX) {
-                if (distance > startX) scale += distance / factor;
-                if (distance < startX) scale -= distance / factor;
+                if (distance > startX) scale += change;
+                if (distance < startX) scale -= change;
             } else {
-                if (distance > startX) scale -= distance / factor;
-                if (distance < startX) scale += distance / factor;
+                if (distance > startX) scale -= change;
+                if (distance < startX) scale += change;
             }
             startX = distance;
             const canvas = document.getElementById("canvas0");

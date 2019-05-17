@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { Layer } from "./elements";
 import ClickMonitor from "../../tools/ClickMonitor";
-import { scale } from "../Editor";
+import { scale, resetScale } from "../Editor";
 
 export class CanvasLayer extends Component {
-    layer = React.createRef();
-
     fillCanvas = () => {
-        const canvas = this.layer.current;
+        const canvas = this.layer;
         const context = canvas.getContext("2d");
         canvas.width = this.props.width;
         canvas.height = this.props.height;
@@ -25,18 +23,23 @@ export class CanvasLayer extends Component {
     componentDidMount() {
         this.fillCanvas();
         this.setupListeners();
+
+        const { parentElement } = this.layer;
+        this.layer.style.width = null;
+        this.layer.style.height = null;
+        parentElement.style.width = null;
+        parentElement.style.height = null;
+        resetScale();
     }
 
-    componentDidUpdate() {
-        // this.fillCanvas();
-    }
+    componentDidUpdate() {}
 
     componentWillUnmount() {
         this.removeListeners();
     }
 
     setupListeners() {
-        const canvas = this.layer.current;
+        const canvas = this.layer;
         canvas.addEventListener("mousedown", this.onMouseDown);
         canvas.addEventListener("mousemove", this.onMouseMove);
         canvas.addEventListener("mouseup", this.onMouseUp);
@@ -49,7 +52,7 @@ export class CanvasLayer extends Component {
     }
 
     removeListeners() {
-        const canvas = this.layer.current;
+        const canvas = this.layer;
         canvas.removeEventListener("mousedown", this.onMouseDown);
         canvas.removeEventListener("mousemove", this.onMouseMove);
         canvas.removeEventListener("mouseup", this.onMouseUp);
@@ -63,7 +66,7 @@ export class CanvasLayer extends Component {
 
     onMouseDown = event => {
         const { tool } = this.props;
-        const context = this.layer.current.getContext("2d");
+        const context = this.layer.getContext("2d");
         const pos = {
             offsetX: event.offsetX / scale,
             offsetY: event.offsetY / scale
@@ -73,7 +76,7 @@ export class CanvasLayer extends Component {
 
     onMouseMove = event => {
         const { tool } = this.props;
-        const context = this.layer.current.getContext("2d");
+        const context = this.layer.getContext("2d");
         const pos = {
             offsetX: event.offsetX / scale,
             offsetY: event.offsetY / scale
@@ -101,7 +104,7 @@ export class CanvasLayer extends Component {
 
     onMouseEnter = event => {
         const { tool } = this.props;
-        const context = this.layer.current.getContext("2d");
+        const context = this.layer.getContext("2d");
         if (tool && tool.onmouseenter) {
             const pos = {
                 offsetX: event.offsetX / scale,
@@ -112,6 +115,6 @@ export class CanvasLayer extends Component {
     };
 
     render() {
-        return <Layer ref={this.layer} id={this.props.id} index={this.props.index} />;
+        return <Layer ref={node => (this.layer = node)} id={this.props.id} index={this.props.index} />;
     }
 }
