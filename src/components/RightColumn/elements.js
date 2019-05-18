@@ -13,7 +13,7 @@ export const HistoryButtonsBox = styled.div`
 `;
 
 export const LeftArrow = styled.i`
-    background: url("/icons/left-arrow.png") no-repeat;
+    background: url("icons/left-arrow.png") no-repeat;
     height: ${props => props.size + "px"};
     width: ${props => props.size + "px"};
     display: inline-block;
@@ -25,7 +25,7 @@ export const LeftArrow = styled.i`
 `;
 
 export const RightArrow = styled.i`
-    background: url("/icons/right-arrow.png") no-repeat;
+    background: url("icons/right-arrow.png") no-repeat;
     height: ${props => props.size + "px"};
     width: ${props => props.size + "px"};
     display: inline-block;
