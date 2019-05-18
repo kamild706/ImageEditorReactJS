@@ -35,12 +35,6 @@ export const EditorBlock = styled.div`
     height: 100%;
 `;
 
-export const RightBar = styled.div`
-    border-top: 5px solid ${props => props.theme.rightbar.borderTopColor};
-    height: 100%;
-    background-color: ${props => props.theme.rightbar.backgroundColor};
-`;
-
 export const OpenFiles = styled.div`
     height: 2rem;
     background-color: ${props => props.theme.openfiles.backgroundColor};
@@ -52,8 +46,5 @@ export const ImageArea = styled.div`
     overflow: auto;
     display: flex;
     align-items: center;
-    cursor: ${props =>
-        props.tool && props.tool.name === TOOL_TYPES.HAND_TOOL
-            ? "grab"
-            : "crosshair"};
+    cursor: ${props => (props.tool && props.tool.name === TOOL_TYPES.HAND_TOOL ? "grab" : "crosshair")};
 `;

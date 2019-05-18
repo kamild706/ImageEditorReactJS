@@ -6,7 +6,10 @@ export const TYPES = {
     SELECT_TOOL: "SELECT_TOOL",
     SELECT_COLOR: "SELECT_COLOR",
     UPDATE_IMAGE_CONTENTS: "UPDATE_IMAGE_CONTENTS",
-    UPDATE_IMAGE_ID: "UPDATE_IMAGE_ID"
+    UPDATE_IMAGE_ID: "UPDATE_IMAGE_ID",
+    IMAGE_BACKUP: "IMAGE_BACKUP",
+    BACKUP_MOVE_BACK: "BACKUP_MOVE_BACK",
+    BACKUP_MOVE_FORWARD: "BACKUP_MOVE_FORWARD"
 };
 
 export const TOOL_TYPES = {
@@ -30,6 +33,7 @@ export const loadImageFromLocalFile = file => dispatch => {
         image.src = reader.result;
         image.onload = () => {
             dispatch(receiveImage(reader.result, image.width, image.height));
+            dispatch(backupCurrentImage());
         };
     });
     return reader.readAsDataURL(file);
@@ -43,6 +47,7 @@ export const fetchImage = url => dispatch => {
             image.src = base64img;
             image.onload = () => {
                 dispatch(receiveImage(base64img, image.width, image.height));
+                dispatch(backupCurrentImage());
             };
         });
     });
@@ -67,6 +72,29 @@ const updateImageId = id => ({
     id
 });
 
+const backupCurrentImage = () => (dispatch, getState) => {
+    const { image } = getState();
+    dispatch({
+        type: TYPES.IMAGE_BACKUP,
+        image,
+        createdAt: new Date().getTime()
+    });
+};
+
+export const moveToPreviousImage = () => (dispatch, getState) => {
+    const { backup } = getState();
+    if (backup.current > 0) {
+        dispatch({ type: TYPES.BACKUP_MOVE_BACK });
+    }
+};
+
+export const moveToNextImage = () => (dispatch, getState) => {
+    const { backup } = getState();
+    if (backup.current + 1 < backup.images.length) {
+        dispatch({ type: TYPES.BACKUP_MOVE_FORWARD });
+    }
+};
+
 export const selectTool = toolType => ({
     type: TYPES.SELECT_TOOL,
     toolType
@@ -89,13 +117,16 @@ const applyFilterRequest = (imgId, filterURL, body = {}) => {
 };
 
 export const applyFilter = (imgData, filterURL, params = {}) => (dispatch, getState) => {
-    const { databaseId: id } = getState().image;
+    const { image } = getState();
+    const { databaseId: id } = image;
     if (id) {
         updateImageOnServer(id, imgData).then(() => {
             applyFilterRequest(id, filterURL, params)
                 .then(response => response.text())
                 .then(contents => {
+                    dispatch(backupCurrentImage());
                     dispatch(updateImageContents(contents));
+                    dispatch(backupCurrentImage());
                 });
         });
     } else {
@@ -103,8 +134,10 @@ export const applyFilter = (imgData, filterURL, params = {}) => (dispatch, getSt
             applyFilterRequest(id, filterURL, params)
                 .then(response => response.text())
                 .then(contents => {
-                    dispatch(updateImageContents(contents));
                     dispatch(updateImageId(id));
+                    dispatch(backupCurrentImage());
+                    dispatch(updateImageContents(contents));
+                    dispatch(backupCurrentImage());
                 });
         });
     }

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Wrapper } from "./elements";
 import SplitPane from "react-split-pane";
-import { MainBlock, EditorBlock, OpenFiles, ImageArea, RightBar } from "./elements";
+import { MainBlock, EditorBlock, OpenFiles, ImageArea } from "./elements";
 import VisibleImage from "../../containers/VisibleImage";
 import ClickableToolbar from "../../containers/ClickableToolbar";
 import { TOOL_TYPES } from "../../actions";
+import VisibleRightColumn from "../../containers/VisibleRightColumn";
 export let scale = 1;
 let startX = 0;
 
@@ -127,7 +128,7 @@ class Editor extends Component {
                                     <VisibleImage />
                                 </ImageArea>
                             </EditorBlock>
-                            <RightBar />
+                            <VisibleRightColumn />
                         </SplitPane>
                     </MainBlock>
                 </SplitPane>
