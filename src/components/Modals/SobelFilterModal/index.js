@@ -4,23 +4,14 @@ import { Header, Input, Button, StyledModal, CloseButton, HeaderTitle, Label, Ma
 
 ReactModal.setAppElement("#root");
 
-class HistogramFilterModal extends Component {
+class SobelFilterModal extends Component {
     state = {
-        params: "1, 2"
+        params: "horizontal"
     };
 
     handleCreateRequest = () => {
         let { params } = this.state;
-        if (params.length > 0) {
-            const arr = params
-                .replace(/(, *)|( +)/g, " ")
-                .split(" ")
-                .map(num => Number(num));
-            this.props.onConfirm({ intparams: arr });
-        } else {
-            this.props.onConfirm();
-        }
-
+        this.props.onConfirm({ direction: params });
         this.props.onClose();
     };
 
@@ -30,15 +21,16 @@ class HistogramFilterModal extends Component {
     };
 
     render() {
+        const { isOpen, onClose, title } = this.props;
         return (
-            <StyledModal isOpen={this.props.isOpen} onRequestClose={this.props.onClose}>
+            <StyledModal isOpen={isOpen} onRequestClose={onClose}>
                 <Header>
-                    <HeaderTitle>Histogram</HeaderTitle>
-                    <CloseButton onClick={this.props.onClose} />
+                    <HeaderTitle>{title ? title : "Sobel"}</HeaderTitle>
+                    <CloseButton onClick={onClose} />
                 </Header>
                 <Main>
                     <Div>
-                        <Label>2 params</Label>
+                        <Label>Direction</Label>
                         <Input onChange={this.handleInputChange} name="params" type="text" value={this.state.params} />
                     </Div>
                     <Button onClick={this.handleCreateRequest}>Apply</Button>
@@ -48,4 +40,4 @@ class HistogramFilterModal extends Component {
     }
 }
 
-export default HistogramFilterModal;
+export default SobelFilterModal;

@@ -4,6 +4,7 @@ import SubMenuItem from "../SubMenuItem";
 import GradientFilterModal from "../../Modals/GradientFilterModal";
 import HistogramFilterModal from "../../Modals/HistogramFilterModal";
 import BlendFilterModal from "../../Modals/BlendFilterModal";
+import SobelFilterModal from "../../Modals/SobelFilterModal";
 
 export default class Filter extends Component {
     state = {
@@ -44,9 +45,18 @@ export default class Filter extends Component {
                     <SubMenuItem name="Blend" onClick={() => this.openModal("blend")} />
                     <SubMenuItem name="Half blend" onClick={() => this.openModal("halfblend")} />
                     <SubMenuItem name="Min RGB" onClick={() => applyFilter(this.getImageData(), "minrgb")} />
-                    <SubMenuItem name="Median" />
-                    <SubMenuItem name="Convolution" />
-                    <SubMenuItem name="Pixelate" />
+                    {/*<SubMenuItem name="Median" onClick={() => applyFilter(this.getImageData(), "median")} />*/}
+                    <SubMenuItem name="Blur">
+                        <SubMenuItem
+                            name="Gaussian"
+                            onClick={() => applyFilter(this.getImageData(), "blur/gaussian")}
+                        />
+                        <SubMenuItem name="Box" onClick={() => applyFilter(this.getImageData(), "blur/box")} />
+                    </SubMenuItem>
+                    <SubMenuItem name="Emboss" onClick={() => applyFilter(this.getImageData(), "emboss")} />
+                    <SubMenuItem name="Sobel" onClick={() => this.openModal("sobel")} />
+                    <SubMenuItem name="Prewitt" onClick={() => this.openModal("prewitt")} />
+                    <SubMenuItem name="Pixelize" onClick={() => applyFilter(this.getImageData(), "pixelize")} />
                 </MenuItem>
                 {openModal.endsWith("Gradient") && (
                     <GradientFilterModal
@@ -76,7 +86,22 @@ export default class Filter extends Component {
                         title="Halfblend"
                         onClose={() => this.openModal(false)}
                         isOpen={true}
-                        onConfirm={this.applyFilterWithParams("blend")}
+                        onConfirm={this.applyFilterWithParams("halfblend")}
+                    />
+                )}
+                {openModal === "sobel" && (
+                    <SobelFilterModal
+                        onClose={() => this.openModal(false)}
+                        isOpen={true}
+                        onConfirm={this.applyFilterWithParams("sobel")}
+                    />
+                )}
+                {openModal === "prewitt" && (
+                    <SobelFilterModal
+                        title="Prewitt"
+                        onClose={() => this.openModal(false)}
+                        isOpen={true}
+                        onConfirm={this.applyFilterWithParams("prewitt")}
                     />
                 )}
             </>
