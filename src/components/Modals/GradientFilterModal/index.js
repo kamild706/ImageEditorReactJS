@@ -1,20 +1,23 @@
 import React, { Component } from "react";
 import ReactModal from "react-modal";
-import { Header, Input, Button, StyledModal, CloseButton, HeaderTitle, Label, Main, Div } from "../commons";
+import { Header, Input, Button, StyledModal, CloseButton, HeaderTitle, Label, Main, Div, BlockLabel } from "../commons";
 
 ReactModal.setAppElement("#root");
 
 class GradientFilterModal extends Component {
     state = {
-        params: "1, 2, 3, 4"
+        coords1: "100 200",
+        coords2: "150 140"
     };
 
     handleCreateRequest = () => {
-        let { params } = this.state;
-        const arr = params
+        let { coords1, coords2 } = this.state;
+        let arr = coords1 + " " + coords2;
+        arr = arr
             .replace(/(, *)|( +)/g, " ")
             .split(" ")
             .map(num => Number(num));
+        console.log(arr);
         this.props.onConfirm({ intparams: arr });
         this.props.onClose();
     };
@@ -33,8 +36,25 @@ class GradientFilterModal extends Component {
                 </Header>
                 <Main>
                     <Div>
-                        <Label>4 params</Label>
-                        <Input onChange={this.handleInputChange} name="params" type="text" value={this.state.params} />
+                        <Div>
+                            <Label>X1 Y1</Label>
+                            <Input
+                                onChange={this.handleInputChange}
+                                name="coords1"
+                                type="text"
+                                value={this.state.coords1}
+                            />
+                        </Div>
+                        <Div>
+                            <Label>X2 Y2</Label>
+                            <Input
+                                onChange={this.handleInputChange}
+                                name="coords2"
+                                type="text"
+                                value={this.state.coords2}
+                            />
+                        </Div>
+                        <BlockLabel marginTop="15px">Use comma or space as separator</BlockLabel>
                     </Div>
                     <Button onClick={this.handleCreateRequest}>Apply</Button>
                 </Main>

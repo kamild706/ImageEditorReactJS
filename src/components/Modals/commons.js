@@ -23,7 +23,7 @@ export const StyledModal = styled(ReactModalAdapter).attrs({
     }
 
     .Modal {
-        width: 21.25rem;
+        min-width: 21.25rem;
         background-color: ${props => props.theme.modalDialog.backgroundColor};
         color: white;
     }
@@ -75,9 +75,26 @@ export const Main = styled.main`
 
 export const Label = styled.label`
     display: inline-block;
-    width: 4rem;
+    // width: 4rem;
+    margin-right: 5px;
+`;
+
+export const BlockLabel = styled(Label)`
+    display: block;
+    margin-bottom: 6px;
+    margin-top: ${props => (props.marginTop ? props.marginTop : "0")};
 `;
 
 export const Div = styled.div`
     margin-bottom: 0.5rem;
 `;
+
+export const Select = styled.select`
+    background-color: ${props => props.theme.modalDialog.inputBackgroundColor};
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.3rem;
+`;
+
+export const Option = styled.option``;

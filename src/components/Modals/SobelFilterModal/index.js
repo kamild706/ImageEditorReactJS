@@ -1,23 +1,35 @@
 import React, { Component } from "react";
 import ReactModal from "react-modal";
-import { Header, Input, Button, StyledModal, CloseButton, HeaderTitle, Label, Main, Div } from "../commons";
+import {
+    Header,
+    Input,
+    Button,
+    StyledModal,
+    CloseButton,
+    HeaderTitle,
+    Label,
+    Main,
+    Div,
+    Select,
+    Option
+} from "../commons";
 
 ReactModal.setAppElement("#root");
 
 class SobelFilterModal extends Component {
     state = {
-        params: "horizontal"
+        value: "horizontal"
     };
 
     handleCreateRequest = () => {
-        let { params } = this.state;
-        this.props.onConfirm({ direction: params });
+        let { value } = this.state;
+        this.props.onConfirm({ direction: value });
         this.props.onClose();
     };
 
-    handleInputChange = event => {
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
+    handleChange = event => {
+        const { value } = event.target;
+        this.setState({ value });
     };
 
     render() {
@@ -31,7 +43,10 @@ class SobelFilterModal extends Component {
                 <Main>
                     <Div>
                         <Label>Direction</Label>
-                        <Input onChange={this.handleInputChange} name="params" type="text" value={this.state.params} />
+                        <Select value={this.state.value} onChange={this.handleChange}>
+                            <Option value="horizontal">Horizontal</Option>
+                            <Option value="vertical">Vertical</Option>
+                        </Select>
                     </Div>
                     <Button onClick={this.handleCreateRequest}>Apply</Button>
                 </Main>

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import ReactModal from "react-modal";
-import { Header, Input, Button, StyledModal, CloseButton, HeaderTitle, Label, Main, Div } from "../commons";
+import { Header, Input, Button, StyledModal, CloseButton, HeaderTitle, Label, Main, Div, BlockLabel } from "../commons";
 
 ReactModal.setAppElement("#root");
 
 class HistogramFilterModal extends Component {
     state = {
-        params: "1, 2"
+        params: "100 200"
     };
 
     handleCreateRequest = () => {
@@ -38,8 +38,9 @@ class HistogramFilterModal extends Component {
                 </Header>
                 <Main>
                     <Div>
-                        <Label>2 params</Label>
+                        <Label>Min, Max</Label>
                         <Input onChange={this.handleInputChange} name="params" type="text" value={this.state.params} />
+                        <BlockLabel marginTop="15px">Use comma or space as separator</BlockLabel>
                     </Div>
                     <Button onClick={this.handleCreateRequest}>Apply</Button>
                 </Main>
