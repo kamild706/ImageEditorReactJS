@@ -9,7 +9,8 @@ export const TYPES = {
     UPDATE_IMAGE_ID: "UPDATE_IMAGE_ID",
     IMAGE_BACKUP: "IMAGE_BACKUP",
     BACKUP_MOVE_BACK: "BACKUP_MOVE_BACK",
-    BACKUP_MOVE_FORWARD: "BACKUP_MOVE_FORWARD"
+    BACKUP_MOVE_FORWARD: "BACKUP_MOVE_FORWARD",
+    BACKUP_RESTORE_ORIGINAL: "BACKUP_RESTORE_ORIGINAL"
 };
 
 export const TOOL_TYPES = {
@@ -85,6 +86,13 @@ export const moveToPreviousImage = () => (dispatch, getState) => {
     const { backup } = getState();
     if (backup.current > 0) {
         dispatch({ type: TYPES.BACKUP_MOVE_BACK });
+    }
+};
+
+export const restoreOriginalImage = () => (dispatch, getState) => {
+    const { backup } = getState();
+    if (backup.current > 0) {
+        dispatch({ type: TYPES.BACKUP_RESTORE_ORIGINAL });
     }
 };
 

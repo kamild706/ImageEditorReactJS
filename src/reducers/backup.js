@@ -23,6 +23,11 @@ const backup = (state = initialState, action) => {
                 ...state,
                 current: state.current + 1
             };
+        case TYPES.BACKUP_RESTORE_ORIGINAL:
+            return {
+                ...state,
+                current: 0
+            };
         default:
             return state;
     }
