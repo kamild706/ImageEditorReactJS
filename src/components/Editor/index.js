@@ -107,6 +107,25 @@ class Editor extends Component {
         this.forceUpdate();
     };
 
+    resizeEditor = (imgWidth, imgHeight) => {
+        setTimeout(() => {
+            let windowWidth = this.editorRef.parentElement.parentElement.style.width;
+            windowWidth = windowWidth.substring(0, windowWidth.length - 2);
+            scale = (Number(windowWidth) / imgWidth) * 0.9;
+            console.log(windowWidth);
+
+            const canvas = document.getElementById("canvas0");
+            let { parentElement } = canvas;
+            const width = Number(parentElement.attributes[0].nodeValue);
+            const height = Number(parentElement.attributes[1].nodeValue);
+            parentElement.style.height = `${height * scale}px`;
+            parentElement.style.width = `${width * scale}px`;
+            canvas.style.height = `${height * scale}px`;
+            canvas.style.width = `${width * scale}px`;
+            console.log(scale);
+        }, 100);
+    };
+
     render() {
         return (
             <Wrapper>
@@ -125,7 +144,7 @@ class Editor extends Component {
                             <EditorBlock>
                                 <OpenFiles />
                                 <ImageArea id="editor" tool={this.props.tool} ref={node => (this.editorRef = node)}>
-                                    <VisibleImage />
+                                    <VisibleImage onImageLoaded={this.resizeEditor} />
                                 </ImageArea>
                             </EditorBlock>
                             <VisibleRightColumn />

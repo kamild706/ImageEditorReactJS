@@ -1,10 +1,10 @@
-import React from 'react';
-import { Wrapper } from './elements';
-import EditableCanvasLayer from '../../containers/EditableCanvasLayer';
+import React from "react";
+import { Wrapper } from "./elements";
+import EditableCanvasLayer from "../../containers/EditableCanvasLayer";
 
-export const Image = ({ id, width, height, layers }) => {
-    // if (width && height)
-    if (id)
+export const Image = ({ id, width, height, layers, onImageLoaded }) => {
+    if (id) {
+        onImageLoaded(width, height);
         return (
             <Wrapper width={width} height={height}>
                 {layers &&
@@ -20,5 +20,5 @@ export const Image = ({ id, width, height, layers }) => {
                     ))}
             </Wrapper>
         );
-    else return <></>;
+    } else return <></>;
 };
