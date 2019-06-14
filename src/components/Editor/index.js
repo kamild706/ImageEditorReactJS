@@ -111,8 +111,14 @@ class Editor extends Component {
         setTimeout(() => {
             let windowWidth = this.editorRef.parentElement.parentElement.style.width;
             windowWidth = windowWidth.substring(0, windowWidth.length - 2);
-            scale = (Number(windowWidth) / imgWidth) * 0.9;
-            console.log(windowWidth);
+            let widthScale = (Number(windowWidth) / imgWidth) * 0.9;
+            console.log(widthScale);
+
+            let windowHeight = this.editorRef.parentElement.parentElement.clientHeight;
+            let heightScale = (Number(windowHeight) / imgHeight) * 0.9;
+            console.log(heightScale);
+
+            scale = Math.min(widthScale, heightScale);
 
             const canvas = document.getElementById("canvas0");
             let { parentElement } = canvas;

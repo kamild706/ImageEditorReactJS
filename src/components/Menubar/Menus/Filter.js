@@ -45,7 +45,7 @@ export default class Filter extends Component {
                     <SubMenuItem name="Blend" onClick={() => this.openModal("blend")} />
                     <SubMenuItem name="Half blend" onClick={() => this.openModal("halfblend")} />
                     <SubMenuItem name="Min RGB" onClick={() => applyFilter(this.getImageData(), "minrgb")} />
-                    {/*<SubMenuItem name="Median" onClick={() => applyFilter(this.getImageData(), "median")} />*/}
+                    <SubMenuItem name="Median" onClick={() => applyFilter(this.getImageData(), "median")} />
                     <SubMenuItem name="Blur">
                         <SubMenuItem
                             name="Gaussian"
