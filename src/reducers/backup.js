@@ -7,6 +7,9 @@ const initialState = {
 
 const backup = (state = initialState, action) => {
     switch (action.type) {
+        case TYPES.CREATE_NEW_IMAGE:
+        case TYPES.RECEIVE_IMAGE:
+            return initialState;
         case TYPES.IMAGE_BACKUP:
             const images = [...state.images, { ...action.image, id: action.createdAt }];
             return {
