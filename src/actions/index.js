@@ -7,7 +7,7 @@ export const TYPES = {
     SELECT_COLOR: "SELECT_COLOR",
     UPDATE_IMAGE_CONTENTS: "UPDATE_IMAGE_CONTENTS",
     UPDATE_IMAGE_ID: "UPDATE_IMAGE_ID",
-    IMAGE_BACKUP: "IMAGE_BACKUP",
+    BACKUP_IMAGE: "BACKUP_IMAGE",
     BACKUP_MOVE_BACK: "BACKUP_MOVE_BACK",
     BACKUP_MOVE_FORWARD: "BACKUP_MOVE_FORWARD",
     BACKUP_RESTORE_ORIGINAL: "BACKUP_RESTORE_ORIGINAL"
@@ -76,7 +76,7 @@ const updateImageId = id => ({
 const backupCurrentImage = () => (dispatch, getState) => {
     const { image } = getState();
     dispatch({
-        type: TYPES.IMAGE_BACKUP,
+        type: TYPES.BACKUP_IMAGE,
         image,
         createdAt: new Date().getTime()
     });

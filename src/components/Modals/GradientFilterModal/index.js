@@ -17,7 +17,6 @@ class GradientFilterModal extends Component {
             .replace(/(, *)|( +)/g, " ")
             .split(" ")
             .map(num => Number(num));
-        console.log(arr);
         this.props.onConfirm({ intparams: arr });
         this.props.onClose();
     };

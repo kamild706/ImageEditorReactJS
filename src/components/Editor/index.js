@@ -7,7 +7,12 @@ import ClickableToolbar from "../../containers/ClickableToolbar";
 import { TOOL_TYPES } from "../../actions";
 import VisibleRightColumn from "../../containers/VisibleRightColumn";
 export let scale = 1;
+let rotatedBy90degs = false;
 let startX = 0;
+
+export function toggleRotatedBy90degs() {
+    rotatedBy90degs = !rotatedBy90degs;
+}
 
 export function resetScale() {
     scale = 1;
@@ -16,6 +21,18 @@ export function resetScale() {
 class Editor extends Component {
     state = {
         size: 350
+    };
+
+    static resizeCanvas = canvas => {
+        const { width, height } = canvas;
+
+        const scaledWidth = `${width * scale}px`;
+        const scaledHeight = `${height * scale}px`;
+
+        canvas.style.width = scaledWidth;
+        canvas.style.height = scaledHeight;
+        canvas.parentElement.style.width = scaledWidth;
+        canvas.parentElement.style.height = scaledHeight;
     };
 
     toggleScrolling = isEnable => {
@@ -69,14 +86,9 @@ class Editor extends Component {
                 if (distance < startX) scale += change;
             }
             startX = distance;
+
             const canvas = document.getElementById("canvas0");
-            let { parentElement } = canvas;
-            const width = Number(parentElement.attributes[0].nodeValue);
-            const height = Number(parentElement.attributes[1].nodeValue);
-            parentElement.style.height = `${height * scale}px`;
-            parentElement.style.width = `${width * scale}px`;
-            canvas.style.height = `${height * scale}px`;
-            canvas.style.width = `${width * scale}px`;
+            Editor.resizeCanvas(canvas);
         }
     };
 
@@ -112,22 +124,14 @@ class Editor extends Component {
             let windowWidth = this.editorRef.parentElement.parentElement.style.width;
             windowWidth = windowWidth.substring(0, windowWidth.length - 2);
             let widthScale = (Number(windowWidth) / imgWidth) * 0.9;
-            console.log(widthScale);
 
             let windowHeight = this.editorRef.parentElement.parentElement.clientHeight;
             let heightScale = (Number(windowHeight) / imgHeight) * 0.9;
-            console.log(heightScale);
 
             scale = Math.min(widthScale, heightScale);
 
             const canvas = document.getElementById("canvas0");
-            let { parentElement } = canvas;
-            const width = Number(parentElement.attributes[0].nodeValue);
-            const height = Number(parentElement.attributes[1].nodeValue);
-            parentElement.style.height = `${height * scale}px`;
-            parentElement.style.width = `${width * scale}px`;
-            canvas.style.height = `${height * scale}px`;
-            canvas.style.width = `${width * scale}px`;
+            Editor.resizeCanvas(canvas);
             console.log(scale);
         }, 100);
     };
