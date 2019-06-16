@@ -17,7 +17,8 @@ export const TOOL_TYPES = {
     BRUSH_TOOL: "BRUSH_TOOL",
     HAND_TOOL: "HAND_TOOL",
     ERASER_TOOL: "ERASER_TOOL",
-    ZOOM_TOOL: "ZOOM_TOOL"
+    ZOOM_TOOL: "ZOOM_TOOL",
+    CROP_TOOL: "CROP_TOOL"
 };
 
 export const createNewImage = (width, height) => ({

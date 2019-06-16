@@ -3,10 +3,12 @@ import { ToolDetailsBar, ToolIcon, Icon } from "./elements";
 import { TOOL_TYPES } from "../../actions";
 import { BrushToolDetails } from "./BrushToolDetails";
 import { EraserToolDetails } from "./EraserToolDetails";
+import { CropToolDetails } from "./CropToolDetails";
 
 const COMPONENTS = {};
 COMPONENTS[TOOL_TYPES.BRUSH_TOOL] = <BrushToolDetails />;
 COMPONENTS[TOOL_TYPES.ERASER_TOOL] = <EraserToolDetails />;
+COMPONENTS[TOOL_TYPES.CROP_TOOL] = <CropToolDetails />;
 
 const ToolDetails = ({ selectedTool, path }) => {
     function computePath() {
@@ -19,10 +21,7 @@ const ToolDetails = ({ selectedTool, path }) => {
             {selectedTool && (
                 <>
                     <ToolIcon>
-                        <Icon
-                            alt={selectedTool.name}
-                            src={path || computePath()}
-                        />
+                        <Icon alt={selectedTool.name} src={path || computePath()} />
                     </ToolIcon>
                     {COMPONENTS[selectedTool.name]}
                 </>

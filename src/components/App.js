@@ -90,6 +90,48 @@ const GlobalStyle = createGlobalStyle`
     #root {
         overflow: hidden;
     }
+    
+    #cropArea {
+        border: 2px dashed white;
+        width: 200px;
+        height: 200px;
+        background-color: transparent;
+        position: absolute;
+        top: 500px;
+        left: 500px;
+          
+        display: flex;
+        flex-direction: column;
+          justify-content: space-between;
+        }
+        
+        #cropArea > div > div {
+          width: 7px;
+          height: 7px;
+          background-color: white;
+          margin-bottom: -4px;
+          margin-left: -4px;
+          margin-right: -4px;
+          margin-top: -4px;
+        }
+        
+        #cropArea > div {
+          display: flex;
+          justify-content: space-between;
+        }
+        
+        #topRight:hover, #bottomLeft:hover {
+          cursor: nesw-resize;
+        }
+        
+        
+        #topLeft:hover, #bottomRight:hover {
+          cursor: nwse-resize;
+        }
+        
+        #cropArea:hover {
+          cursor: move;
+        }
 `;
 
 class App extends Component {

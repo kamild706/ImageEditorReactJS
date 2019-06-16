@@ -18,9 +18,13 @@ const Toolbar = ({ selectTool, selectedTool, color }) => {
             {/*<Tool name="Move Tool" />
             <Tool name="Rectangle Select" />
             <Tool name="Lasso Select" />
-            <Tool name="Quick Selection" />
-            <Tool name="Crop Tool" />
-            <Tool name="Eyedropper" />
+            <Tool name="Quick Selection" />*/}
+            <Tool
+                name="Crop Tool"
+                onClick={() => handleClick(TOOL_TYPES.CROP_TOOL)}
+                selected={selectedTool && selectedTool.name}
+            />
+            {/*<Tool name="Eyedropper" />
             <Tool name="Spot Healing Brush Tool" />*/}
             <Tool
                 name="Brush Tool"

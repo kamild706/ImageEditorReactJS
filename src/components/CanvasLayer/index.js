@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Layer } from "./elements";
 import ClickMonitor from "../../tools/ClickMonitor";
 import { scale, resetScale } from "../Editor";
+import { TOOL_TYPES } from "../../actions";
 
 export class CanvasLayer extends Component {
     fillCanvas = () => {
@@ -32,10 +33,23 @@ export class CanvasLayer extends Component {
         resetScale();
     }
 
-    componentDidUpdate() {}
+    componentDidUpdate(prevProps) {
+        const { tool: prevTool } = prevProps;
+        if (prevTool && prevTool.name === TOOL_TYPES.CROP_TOOL) {
+            prevTool.deleteCroptool();
+        }
+        const { tool } = this.props;
+        if (tool && tool.name === TOOL_TYPES.CROP_TOOL) {
+            tool.initCroptool();
+        }
+    }
 
     componentWillUnmount() {
         this.removeListeners();
+        const { tool } = this.props;
+        if (tool && tool.name === TOOL_TYPES.CROP_TOOL) {
+            tool.deleteCroptool();
+        }
     }
 
     setupListeners() {
